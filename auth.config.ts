@@ -1,4 +1,6 @@
 import type { NextAuthConfig } from "next-auth";
+import type { TeachingLevel } from "@/app/lib/teaching-levels";
+import { isTeachingLevel } from "@/app/lib/teaching-levels";
 
 const protectedPrefixes = [
   "/my-class",
@@ -44,12 +46,20 @@ export const authConfig = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
+        if (user.teachingLevel && isTeachingLevel(user.teachingLevel)) {
+          (token as { teachingLevel?: TeachingLevel }).teachingLevel =
+            user.teachingLevel;
+        }
       }
       return token;
     },
     session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string;
+        const level = (token as { teachingLevel?: unknown }).teachingLevel;
+        if (typeof level === "string" && isTeachingLevel(level)) {
+          session.user.teachingLevel = level;
+        }
       }
       return session;
     },

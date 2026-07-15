@@ -2,7 +2,7 @@
 
 import { AuthError } from "next-auth";
 import { signIn, signOut } from "@/auth";
-import { createUser } from "./users";
+import { createUser, isTeachingLevel } from "./users";
 
 export type AuthFormState = {
   error?: string;
@@ -19,6 +19,7 @@ export async function registerAction(
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const teachingLevelRaw = String(formData.get("teachingLevel") ?? "").trim();
 
   if (name.length < 2) {
     return { error: "نام باید حداقل ۲ حرف باشد." };
@@ -29,9 +30,17 @@ export async function registerAction(
   if (password.length < 6) {
     return { error: "رمز عبور باید حداقل ۶ کاراکتر باشد." };
   }
+  if (!isTeachingLevel(teachingLevelRaw)) {
+    return { error: "مقطع تدریس را انتخاب کنید." };
+  }
 
   try {
-    await createUser({ name, email, password });
+    await createUser({
+      name,
+      email,
+      password,
+      teachingLevel: teachingLevelRaw,
+    });
   } catch (err) {
     if (err instanceof Error && err.message === "EMAIL_TAKEN") {
       return { error: "این ایمیل قبلاً ثبت شده است." };

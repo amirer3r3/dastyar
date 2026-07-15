@@ -5,6 +5,7 @@ import Link from "next/link";
 import { UserPlus, AlertCircle } from "lucide-react";
 import { registerAction } from "@/app/lib/auth-actions";
 import AuthSubmit from "@/app/components/auth-submit";
+import { teachingLevelOptions } from "@/app/lib/teaching-levels";
 
 export default function RegisterPage() {
   const [state, formAction] = useActionState(registerAction, undefined);
@@ -49,6 +50,31 @@ export default function RegisterPage() {
             placeholder="example@mail.com"
             className="h-12 rounded-app border border-border bg-card px-4 text-sm text-foreground outline-none transition-colors focus:border-primary placeholder:text-muted"
           />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="teachingLevel"
+            className="text-sm font-medium text-foreground"
+          >
+            شما معلم چه مقطعی هستید؟
+          </label>
+          <select
+            id="teachingLevel"
+            name="teachingLevel"
+            required
+            defaultValue=""
+            className="h-12 rounded-app border border-border bg-card px-4 text-sm text-foreground outline-none transition-colors focus:border-primary"
+          >
+            <option value="" disabled>
+              انتخاب مقطع...
+            </option>
+            {teachingLevelOptions.map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="flex flex-col gap-1.5">

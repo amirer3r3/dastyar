@@ -22,7 +22,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const user = await verifyCredentials(email, password);
         if (!user) return null;
 
-        return { id: user.id, name: user.name, email: user.email };
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          teachingLevel: user.teachingLevel,
+        };
       },
     }),
   ],

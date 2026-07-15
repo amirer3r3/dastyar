@@ -41,7 +41,7 @@ export const educationalContent: ContentCard[] = [
   {
     href: "/worksheets",
     title: "کاربرگ",
-    description: "طراحی و خروجی PDF",
+    description: "کاربرگ بر اساس پایه و درس",
     icon: FileText,
     color: "#3b82f6",
   },

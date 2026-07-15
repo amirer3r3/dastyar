@@ -1,5 +1,5 @@
-import WorksheetEditor from "./worksheet-editor";
+import WorksheetsBrowser from "./worksheets-browser";
 
 export default function WorksheetsPage() {
-  return <WorksheetEditor />;
+  return <WorksheetsBrowser />;
 }
