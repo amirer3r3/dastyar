@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Download, FileText } from "lucide-react";
-import { findWorksheetItem } from "../curriculum-data";
+import {
+  findWorksheetItem,
+  getAllWorksheetItemIds,
+} from "../curriculum-data";
 import WorksheetPdfPanel from "./worksheet-pdf-panel";
+
+export function generateStaticParams() {
+  return getAllWorksheetItemIds().map((id) => ({ id }));
+}
 
 export default async function WorksheetDetailPage({
   params,

@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource-variable/vazirmatn": "^5.2.8",
     "bcryptjs": "^3.0.3",
     "html-to-image": "^1.11.13",
     "lucide-react": "^1.23.0",

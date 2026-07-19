@@ -35,12 +35,12 @@ async function writeAll(ratings: Rating[]): Promise<void> {
   await fs.writeFile(RATINGS_FILE, JSON.stringify(ratings, null, 2), "utf-8");
 }
 
-export async function getRatingSummary(
+function summarize(
+  all: Rating[],
   targetType: RatingTarget,
   targetId: string,
   seedRating = 0
-): Promise<RatingSummary> {
-  const all = await readAll();
+): RatingSummary {
   const relevant = all.filter(
     (r) => r.targetType === targetType && r.targetId === targetId
   );
@@ -56,6 +56,29 @@ export async function getRatingSummary(
     average: Math.round((sum / relevant.length) * 10) / 10,
     count: relevant.length,
   };
+}
+
+export async function getRatingSummary(
+  targetType: RatingTarget,
+  targetId: string,
+  seedRating = 0
+): Promise<RatingSummary> {
+  const all = await readAll();
+  return summarize(all, targetType, targetId, seedRating);
+}
+
+/** یک بار فایل را می‌خواند و چند خلاصه برمی‌گرداند (جلوگیری از N+1 روی Vercel) */
+export async function getRatingSummaries(
+  items: Array<{
+    targetType: RatingTarget;
+    targetId: string;
+    seedRating?: number;
+  }>
+): Promise<RatingSummary[]> {
+  const all = await readAll();
+  return items.map((item) =>
+    summarize(all, item.targetType, item.targetId, item.seedRating ?? 0)
+  );
 }
 
 export async function getUserRating(
