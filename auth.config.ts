@@ -7,7 +7,9 @@ const protectedPrefixes = [
   "/planner",
   "/create",
   "/account",
-  "/lesson-plan",
+  "/lesson-plan/create",
+  "/lesson-plan/new",
+  "/lesson-plan/edit",
   "/quiz",
   "/marketplace/upload",
 ];

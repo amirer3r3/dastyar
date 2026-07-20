@@ -4,9 +4,8 @@ import { authConfig } from "./auth.config";
 export default NextAuth(authConfig).auth;
 
 /**
- * فقط مسیرهای محافظت‌شده از Middleware رد می‌شوند.
- * مسیرهای عمومی مثل /, /worksheets، /marketplace
- * دیگر روی هر navigation منتظر Auth نمی‌مانند.
+ * طرح درس و کاربرگ عمومی‌اند.
+ * فقط مسیرهای طراحی/ویرایش طرح درس نیاز به ورود دارند.
  */
 export const config = {
   matcher: [
@@ -14,8 +13,10 @@ export const config = {
     "/planner/:path*",
     "/create/:path*",
     "/account/:path*",
-    "/lesson-plan/:path*",
-    // آزمون‌های take عمومی‌اند؛ فقط لیست/ویرایش/نتایج محافظت شوند
+    "/lesson-plan/create",
+    "/lesson-plan/create/:path*",
+    "/lesson-plan/new",
+    "/lesson-plan/edit/:path*",
     "/quiz",
     "/quiz/new",
     "/quiz/:id",

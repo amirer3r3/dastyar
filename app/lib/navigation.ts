@@ -48,7 +48,7 @@ export const educationalContent: ContentCard[] = [
   {
     href: "/lesson-plan",
     title: "طرح درس",
-    description: "فرمت‌های آماده",
+    description: "طرح درس بر اساس پایه و درس",
     icon: BookOpen,
     color: "#16a34a",
   },

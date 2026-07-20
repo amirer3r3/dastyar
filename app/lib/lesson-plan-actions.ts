@@ -52,8 +52,8 @@ export async function saveLessonPlanAction(
     await createLessonPlan(userId, input);
   }
 
-  revalidatePath("/lesson-plan");
-  redirect("/lesson-plan");
+  revalidatePath("/lesson-plan/create");
+  redirect("/lesson-plan/create");
 }
 
 export async function deleteLessonPlanAction(formData: FormData): Promise<void> {
@@ -61,6 +61,6 @@ export async function deleteLessonPlanAction(formData: FormData): Promise<void> 
   const id = String(formData.get("id") ?? "").trim();
   if (id) {
     await deleteLessonPlan(userId, id);
-    revalidatePath("/lesson-plan");
+    revalidatePath("/lesson-plan/create");
   }
 }

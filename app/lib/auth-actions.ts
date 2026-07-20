@@ -12,6 +12,15 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isRedirectError(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const digest = (err as { digest?: string }).digest;
+  return (
+    typeof digest === "string" &&
+    (digest.startsWith("NEXT_REDIRECT") || digest.startsWith("NEXT_REDIRECT;"))
+  );
+}
+
 export async function registerAction(
   _prevState: AuthFormState,
   formData: FormData
@@ -45,14 +54,34 @@ export async function registerAction(
     if (err instanceof Error && err.message === "EMAIL_TAKEN") {
       return { error: "این ایمیل قبلاً ثبت شده است." };
     }
+    if (err instanceof Error && err.message === "STORAGE_ERROR") {
+      return {
+        error:
+          "ذخیره کاربر ممکن نیست. روی سرور آنلاین باید دیتابیس وصل شود؛ فعلاً روی localhost تست کنید.",
+      };
+    }
+    console.error("register createUser failed:", err);
     return { error: "خطا در ثبت‌نام. دوباره تلاش کنید." };
   }
 
-  await signIn("credentials", {
-    email,
-    password,
-    redirectTo: "/",
-  });
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/",
+    });
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    if (err instanceof AuthError) {
+      return {
+        error:
+          "حساب ساخته شد ولی ورود خودکار نشد. از صفحه ورود وارد شوید.",
+      };
+    }
+    throw err;
+  }
 }
 
 export async function loginAction(
@@ -73,6 +102,9 @@ export async function loginAction(
       redirectTo: "/",
     });
   } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
     if (err instanceof AuthError) {
       return { error: "ایمیل یا رمز عبور اشتباه است." };
     }

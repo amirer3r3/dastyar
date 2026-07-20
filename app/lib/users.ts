@@ -41,8 +41,13 @@ async function readUsers(): Promise<StoredUser[]> {
 }
 
 async function writeUsers(users: StoredUser[]): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), "utf-8");
+  try {
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), "utf-8");
+  } catch (err) {
+    console.error("writeUsers failed:", err);
+    throw new Error("STORAGE_ERROR");
+  }
 }
 
 export function normalizeEmail(email: string): string {

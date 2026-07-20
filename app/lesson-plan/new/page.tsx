@@ -7,7 +7,7 @@ export default function NewLessonPlanPage() {
     <>
       <header className="sticky top-0 z-40 flex items-center gap-2 bg-background/90 px-4 py-3 backdrop-blur">
         <Link
-          href="/lesson-plan"
+          href="/lesson-plan/create"
           aria-label="بازگشت"
           className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground"
         >
