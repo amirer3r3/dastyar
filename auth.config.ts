@@ -48,6 +48,7 @@ export const authConfig = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
+        token.isAdmin = user.isAdmin === true;
         if (user.teachingLevel && isTeachingLevel(user.teachingLevel)) {
           (token as { teachingLevel?: TeachingLevel }).teachingLevel =
             user.teachingLevel;
@@ -58,6 +59,7 @@ export const authConfig = {
     session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string;
+        session.user.isAdmin = token.isAdmin === true;
         const level = (token as { teachingLevel?: unknown }).teachingLevel;
         if (typeof level === "string" && isTeachingLevel(level)) {
           session.user.teachingLevel = level;

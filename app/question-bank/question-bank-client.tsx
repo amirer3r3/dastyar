@@ -5,72 +5,52 @@ import Link from "next/link";
 import {
   ArrowRight,
   FileQuestion,
-  Search,
-  X,
   ChevronDown,
-  Eye,
-  EyeOff,
+  GraduationCap,
+  BookOpen,
+  ListChecks,
+  FileText,
+  ClipboardList,
 } from "lucide-react";
 import {
-  type Question,
-  type Difficulty,
-  grades,
-  subjects,
-  difficulties,
-  difficultyLabel,
-  difficultyColor,
-} from "./data";
+  questionBankGrades,
+  getQBSubject,
+  getQBFlatLessons,
+  type QBSubject,
+} from "./curriculum-data";
 
-type Filters = {
-  grade: string;
-  subject: string;
-  difficulty: Difficulty | "";
-  search: string;
-};
+type Tab = "lesson" | "final";
 
-const emptyFilters: Filters = {
-  grade: "",
-  subject: "",
-  difficulty: "",
-  search: "",
-};
+export default function QuestionBankClient() {
+  const [tab, setTab] = useState<Tab>("lesson");
+  const [gradeId, setGradeId] = useState(questionBankGrades[0]?.id ?? "");
+  const [subjectId, setSubjectId] = useState(
+    questionBankGrades[0]?.subjects[0]?.id ?? ""
+  );
 
-export default function QuestionBankClient({
-  questions,
-}: {
-  questions: Question[];
-}) {
-  const [filters, setFilters] = useState<Filters>(emptyFilters);
+  const selectedGrade = useMemo(
+    () => questionBankGrades.find((g) => g.id === gradeId),
+    [gradeId]
+  );
 
-  const filtered = useMemo(() => {
-    return questions.filter((q) => {
-      if (filters.grade && q.grade !== filters.grade) return false;
-      if (filters.subject && q.subject !== filters.subject) return false;
-      if (filters.difficulty && q.difficulty !== filters.difficulty) return false;
-      if (filters.search) {
-        const s = filters.search.trim().toLowerCase();
-        if (
-          !q.text.toLowerCase().includes(s) &&
-          !q.answer.toLowerCase().includes(s)
-        ) {
-          return false;
-        }
-      }
-      return true;
-    });
-  }, [questions, filters]);
+  const subjects = selectedGrade?.subjects ?? [];
 
-  const hasActiveFilters =
-    filters.grade || filters.subject || filters.difficulty || filters.search;
+  const selectedSubject = useMemo(() => {
+    if (!gradeId || !subjectId) return undefined;
+    return getQBSubject(gradeId, subjectId);
+  }, [gradeId, subjectId]);
 
-  const clearFilters = () => setFilters(emptyFilters);
+  function handleGradeChange(next: string) {
+    const grade = questionBankGrades.find((g) => g.id === next);
+    setGradeId(next);
+    setSubjectId(grade?.subjects[0]?.id ?? "");
+  }
 
-  const set = <K extends keyof Filters>(key: K, value: Filters[K]) =>
-    setFilters((prev) => ({ ...prev, [key]: value }));
+  const lessons = selectedSubject ? getQBFlatLessons(selectedSubject) : [];
 
   return (
-    <>
-      <header className="sticky top-0 z-40 bg-background/90 backdrop-blur">
+    <div className="pb-8">
+      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur">
         <div className="flex items-center justify-between gap-3 px-4 py-3">
           <div className="flex items-center gap-2">
             <Link
@@ -82,179 +62,168 @@ export default function QuestionBankClient({
             </Link>
             <div className="flex items-center gap-2">
               <FileQuestion size={20} className="text-primary" />
-              <h1 className="text-base font-bold text-foreground">بانک سوالات</h1>
+              <h1 className="text-base font-bold text-foreground">
+                نمونه سوالات
+              </h1>
             </div>
           </div>
-          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
-            {filtered.length} سوال
-          </span>
-        </div>
-
-        {/* جستجو */}
-        <div className="px-4 pb-2">
-          <div className="flex items-center gap-2 rounded-app border border-border bg-card px-3 py-2.5 shadow-sm">
-            <Search size={18} className="shrink-0 text-muted" />
-            <input
-              type="text"
-              value={filters.search}
-              onChange={(e) => set("search", e.target.value)}
-              placeholder="جستجو در متن سوال یا پاسخ..."
-              className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
-            />
-            {filters.search ? (
-              <button
-                type="button"
-                onClick={() => set("search", "")}
-                aria-label="پاک کردن جستجو"
-                className="text-muted"
-              >
-                <X size={16} />
-              </button>
-            ) : null}
-          </div>
-        </div>
-
-        {/* فیلترها */}
-        <div className="flex gap-2 overflow-x-auto px-4 pb-3">
-          <FilterSelect
-            label="پایه"
-            value={filters.grade}
-            options={grades}
-            onChange={(v) => set("grade", v)}
-          />
-          <FilterSelect
-            label="درس"
-            value={filters.subject}
-            options={subjects}
-            onChange={(v) => set("subject", v)}
-          />
-          <FilterSelect
-            label="سختی"
-            value={filters.difficulty}
-            options={difficulties.map((d) => d.value)}
-            labels={Object.fromEntries(
-              difficulties.map((d) => [d.value, d.label])
-            )}
-            onChange={(v) => set("difficulty", v as Difficulty | "")}
-          />
-          {hasActiveFilters ? (
-            <button
-              type="button"
-              onClick={clearFilters}
-              className="flex shrink-0 items-center gap-1 rounded-full border border-danger/30 bg-danger/10 px-3 py-2 text-xs font-bold text-danger"
-            >
-              <X size={14} />
-              پاک کردن
-            </button>
+          {tab === "lesson" && selectedSubject ? (
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+              {lessons.length.toLocaleString("fa-IR")} مورد
+            </span>
           ) : null}
         </div>
       </header>
 
-      <main className="flex flex-col gap-3 px-4 pt-1 pb-4">
-        {filtered.length === 0 ? (
-          <div className="mt-10 flex flex-col items-center gap-3 text-center">
-            <FileQuestion size={48} className="text-muted" />
-            <p className="text-sm font-medium text-muted">
-              سوالی با این فیلترها پیدا نشد.
-            </p>
-            <button
-              type="button"
-              onClick={clearFilters}
-              className="text-sm font-bold text-primary"
-            >
-              پاک کردن فیلترها
-            </button>
+      <main className="flex flex-col gap-4 px-4 pt-1">
+        <p className="text-sm leading-7 text-muted">
+          پایه و درس را انتخاب کنید تا فهرست نمونه سوالات نمایش داده شود.
+        </p>
+
+        <div className="grid grid-cols-2 gap-1 rounded-2xl bg-primary/5 p-1">
+          <button
+            type="button"
+            onClick={() => setTab("lesson")}
+            className={`rounded-xl py-2.5 text-sm font-bold transition-colors ${
+              tab === "lesson"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted"
+            }`}
+          >
+            درس به درس
+          </button>
+          <button
+            type="button"
+            onClick={() => setTab("final")}
+            className={`rounded-xl py-2.5 text-sm font-bold transition-colors ${
+              tab === "final"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted"
+            }`}
+          >
+            آزمون نهایی
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <label className="flex flex-col gap-1.5">
+            <span className="text-[11px] font-medium text-muted">
+              پایه تحصیلی
+            </span>
+            <div className="relative">
+              <span className="pointer-events-none absolute right-3 top-1/2 z-10 -translate-y-1/2 text-primary">
+                <GraduationCap size={18} />
+              </span>
+              <select
+                value={gradeId}
+                onChange={(e) => handleGradeChange(e.target.value)}
+                className="h-12 w-full appearance-none rounded-2xl border border-border bg-card py-2 pr-10 pl-8 text-sm font-medium text-foreground shadow-sm outline-none focus:border-primary"
+              >
+                {questionBankGrades.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.title}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+              />
+            </div>
+          </label>
+
+          <label className="flex flex-col gap-1.5">
+            <span className="text-[11px] font-medium text-muted">درس</span>
+            <div className="relative">
+              <span className="pointer-events-none absolute right-3 top-1/2 z-10 -translate-y-1/2 text-primary">
+                <BookOpen size={18} />
+              </span>
+              <select
+                value={subjectId}
+                onChange={(e) => setSubjectId(e.target.value)}
+                disabled={!gradeId || subjects.length === 0}
+                className="h-12 w-full appearance-none rounded-2xl border border-border bg-card py-2 pr-10 pl-8 text-sm font-medium text-foreground shadow-sm outline-none focus:border-primary disabled:opacity-50"
+              >
+                {subjects.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.title}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+              />
+            </div>
+          </label>
+        </div>
+
+        {selectedGrade && selectedSubject ? (
+          <div className="flex justify-center">
+            <span className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold text-primary">
+              {selectedGrade.title} • {selectedSubject.title}
+            </span>
           </div>
-        ) : (
-          filtered.map((q) => <QuestionCard key={q.id} question={q} />)
-        )}
+        ) : null}
+
+        {tab === "final" ? (
+          <FinalExamEmpty />
+        ) : selectedSubject ? (
+          <LessonList subject={selectedSubject} lessons={lessons} />
+        ) : null}
       </main>
-    </>
-  );
-}
-
-function FilterSelect({
-  label,
-  value,
-  options,
-  labels,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  options: string[];
-  labels?: Record<string, string>;
-  onChange: (v: string) => void;
-}) {
-  const display = value ? (labels?.[value] ?? value) : label;
-
-  return (
-    <div className="relative shrink-0">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={`appearance-none rounded-full border py-2 pl-8 pr-3 text-xs font-medium outline-none transition-colors ${
-          value
-            ? "border-primary bg-primary/10 text-primary"
-            : "border-border bg-card text-muted"
-        }`}
-      >
-        <option value="">{label}</option>
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {labels?.[opt] ?? opt}
-          </option>
-        ))}
-      </select>
-      <ChevronDown
-        size={14}
-        className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-muted"
-      />
-      <span className="sr-only">{display}</span>
     </div>
   );
 }
 
-function QuestionCard({ question }: { question: Question }) {
-  const [showAnswer, setShowAnswer] = useState(false);
-  const color = difficultyColor(question.difficulty);
-
+function LessonList({
+  subject,
+  lessons,
+}: {
+  subject: QBSubject;
+  lessons: Array<{ id: string; title: string }>;
+}) {
   return (
-    <article className="rounded-app border border-border bg-card p-4 shadow-sm">
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
-          {question.grade}
-        </span>
-        <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[11px] font-bold text-accent">
-          {question.subject}
-        </span>
-        <span
-          className="rounded-full px-2.5 py-0.5 text-[11px] font-bold"
-          style={{ backgroundColor: `${color}18`, color }}
-        >
-          {difficultyLabel(question.difficulty)}
-        </span>
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <ListChecks size={16} className="text-primary" />
+        <h2 className="text-sm font-bold text-foreground">
+          سوالات درس به درس · {subject.title}
+        </h2>
       </div>
 
-      <p className="text-sm font-medium leading-7 text-foreground">
-        {question.text}
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        {lessons.map((item, index) => (
+          <Link
+            key={item.id}
+            href={`/question-bank/${item.id}`}
+            className={`flex items-center gap-3 px-4 py-3.5 text-sm font-medium text-foreground transition-colors active:bg-primary/5 ${
+              index < lessons.length - 1 ? "border-b border-border/60" : ""
+            }`}
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-xs font-bold text-primary">
+              {(index + 1).toLocaleString("fa-IR")}
+            </span>
+            <span className="flex-1 leading-6">{item.title}</span>
+            <FileText size={15} className="shrink-0 text-primary" />
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FinalExamEmpty() {
+  return (
+    <div className="mt-6 flex flex-col items-center gap-3 text-center">
+      <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-primary/10 text-primary">
+        <ClipboardList size={28} />
+      </span>
+      <h2 className="text-sm font-bold text-foreground">آزمون نهایی</h2>
+      <p className="max-w-xs text-sm leading-7 text-muted">
+        محتوای آزمون نهایی به‌زودی اضافه می‌شود. فعلاً از تب «درس به درس»
+        استفاده کنید.
       </p>
-
-      <button
-        type="button"
-        onClick={() => setShowAnswer((v) => !v)}
-        className="mt-3 flex items-center gap-1.5 text-xs font-bold text-primary"
-      >
-        {showAnswer ? <EyeOff size={16} /> : <Eye size={16} />}
-        {showAnswer ? "مخفی کردن پاسخ" : "نمایش پاسخ"}
-      </button>
-
-      {showAnswer ? (
-        <div className="mt-2 rounded-app bg-success/10 px-3 py-2 text-sm leading-7 text-success">
-          <span className="font-bold">پاسخ: </span>
-          {question.answer}
-        </div>
-      ) : null}
-    </article>
+    </div>
   );
 }

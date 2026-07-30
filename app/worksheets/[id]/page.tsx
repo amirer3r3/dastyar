@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Download, FileText } from "lucide-react";
-import {
-  findWorksheetItem,
-  getAllWorksheetItemIds,
-} from "../curriculum-data";
+import { ArrowRight, FileText } from "lucide-react";
+import { findWorksheetItem } from "../curriculum-data";
 import WorksheetPdfPanel from "./worksheet-pdf-panel";
+import ContentPdfSection from "@/app/components/content-pdf-section";
 
-export function generateStaticParams() {
-  return getAllWorksheetItemIds().map((id) => ({ id }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function WorksheetDetailPage({
   params,
@@ -21,7 +17,6 @@ export default async function WorksheetDetailPage({
   if (!meta) notFound();
 
   const title = `کاربرگ ${meta.subjectTitle} — ${meta.item.title}`;
-  const pdfUrl = meta.item.pdfUrl ?? null;
 
   return (
     <div className="pb-8">
@@ -54,27 +49,12 @@ export default async function WorksheetDetailPage({
           </h2>
         </div>
 
-        <WorksheetPdfPanel title={title} pdfUrl={pdfUrl} />
-
-        {pdfUrl ? (
-          <a
-            href={pdfUrl}
-            download
-            className="flex h-12 items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-md shadow-primary/30"
-          >
-            <Download size={18} />
-            دانلود PDF
-          </a>
-        ) : (
-          <button
-            type="button"
-            disabled
-            className="flex h-12 items-center justify-center gap-2 rounded-full bg-muted/30 text-sm font-bold text-muted"
-          >
-            <Download size={18} />
-            فایل PDF به‌زودی اضافه می‌شود
-          </button>
-        )}
+        <ContentPdfSection
+          kind="worksheets"
+          itemId={id}
+          title={title}
+          PdfPanel={WorksheetPdfPanel}
+        />
       </main>
     </div>
   );

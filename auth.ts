@@ -27,6 +27,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
           email: user.email,
           teachingLevel: user.teachingLevel,
+          isAdmin: user.isAdmin === true,
         };
       },
     }),

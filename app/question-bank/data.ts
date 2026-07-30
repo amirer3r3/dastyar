@@ -1,5 +1,7 @@
 export type Difficulty = "easy" | "medium" | "hard";
 
+export type QuestionKind = "lesson" | "final";
+
 export type Question = {
   id: string;
   text: string;
@@ -7,6 +9,7 @@ export type Question = {
   grade: string;
   subject: string;
   difficulty: Difficulty;
+  kind: QuestionKind;
 };
 
 export const grades = [
@@ -18,9 +21,19 @@ export const grades = [
   "پایه ششم",
 ];
 
-export const subjects = ["ریاضی", "علوم", "فارسی", "مطالعات اجتماعی", "هدیه‌های آسمان"];
+export const subjects = [
+  "ریاضی",
+  "علوم",
+  "فارسی",
+  "مطالعات اجتماعی",
+  "هدیه‌های آسمان",
+];
 
-export const difficulties: { value: Difficulty; label: string; color: string }[] = [
+export const difficulties: {
+  value: Difficulty;
+  label: string;
+  color: string;
+}[] = [
   { value: "easy", label: "آسان", color: "#16a34a" },
   { value: "medium", label: "متوسط", color: "#f59e0b" },
   { value: "hard", label: "سخت", color: "#ef4444" },
@@ -40,6 +53,7 @@ export const questions: Question[] = [
     grade: "پایه سوم",
     subject: "ریاضی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q2",
@@ -48,6 +62,7 @@ export const questions: Question[] = [
     grade: "پایه سوم",
     subject: "ریاضی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q3",
@@ -56,6 +71,7 @@ export const questions: Question[] = [
     grade: "پایه پنجم",
     subject: "ریاضی",
     difficulty: "medium",
+    kind: "lesson",
   },
   {
     id: "q4",
@@ -64,6 +80,7 @@ export const questions: Question[] = [
     grade: "پایه چهارم",
     subject: "ریاضی",
     difficulty: "medium",
+    kind: "lesson",
   },
   {
     id: "q5",
@@ -72,6 +89,7 @@ export const questions: Question[] = [
     grade: "پایه ششم",
     subject: "ریاضی",
     difficulty: "hard",
+    kind: "lesson",
   },
   {
     id: "q6",
@@ -80,6 +98,7 @@ export const questions: Question[] = [
     grade: "پایه چهارم",
     subject: "علوم",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q7",
@@ -88,6 +107,7 @@ export const questions: Question[] = [
     grade: "پایه پنجم",
     subject: "علوم",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q8",
@@ -96,6 +116,7 @@ export const questions: Question[] = [
     grade: "پایه ششم",
     subject: "علوم",
     difficulty: "medium",
+    kind: "lesson",
   },
   {
     id: "q9",
@@ -104,6 +125,7 @@ export const questions: Question[] = [
     grade: "پایه ششم",
     subject: "علوم",
     difficulty: "hard",
+    kind: "final",
   },
   {
     id: "q10",
@@ -112,6 +134,7 @@ export const questions: Question[] = [
     grade: "پایه دوم",
     subject: "فارسی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q11",
@@ -120,6 +143,7 @@ export const questions: Question[] = [
     grade: "پایه دوم",
     subject: "فارسی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q12",
@@ -128,6 +152,7 @@ export const questions: Question[] = [
     grade: "پایه سوم",
     subject: "فارسی",
     difficulty: "medium",
+    kind: "lesson",
   },
   {
     id: "q13",
@@ -136,6 +161,7 @@ export const questions: Question[] = [
     grade: "پایه ششم",
     subject: "فارسی",
     difficulty: "hard",
+    kind: "final",
   },
   {
     id: "q14",
@@ -144,6 +170,7 @@ export const questions: Question[] = [
     grade: "پایه چهارم",
     subject: "مطالعات اجتماعی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q15",
@@ -152,6 +179,7 @@ export const questions: Question[] = [
     grade: "پایه چهارم",
     subject: "مطالعات اجتماعی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q16",
@@ -160,6 +188,7 @@ export const questions: Question[] = [
     grade: "پایه پنجم",
     subject: "مطالعات اجتماعی",
     difficulty: "medium",
+    kind: "final",
   },
   {
     id: "q17",
@@ -168,6 +197,7 @@ export const questions: Question[] = [
     grade: "پایه اول",
     subject: "ریاضی",
     difficulty: "easy",
+    kind: "lesson",
   },
   {
     id: "q18",
@@ -176,5 +206,24 @@ export const questions: Question[] = [
     grade: "پایه پنجم",
     subject: "هدیه‌های آسمان",
     difficulty: "medium",
+    kind: "lesson",
+  },
+  {
+    id: "q19",
+    text: "مساحت مربعی به ضلع ۹ سانتی‌متر چند است؟",
+    answer: "۸۱ سانتی‌متر مربع",
+    grade: "پایه پنجم",
+    subject: "ریاضی",
+    difficulty: "medium",
+    kind: "final",
+  },
+  {
+    id: "q20",
+    text: "تفاوت جامد و مایع را در یک جمله بنویسید.",
+    answer: "جامد شکل ثابت دارد؛ مایع شکل ظرف را می‌گیرد.",
+    grade: "پایه چهارم",
+    subject: "علوم",
+    difficulty: "medium",
+    kind: "final",
   },
 ];

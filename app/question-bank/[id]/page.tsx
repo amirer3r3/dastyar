@@ -1,28 +1,28 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BookOpen } from "lucide-react";
-import { findWorksheetItem } from "@/app/worksheets/curriculum-data";
-import LessonPdfPanel from "./lesson-pdf-panel";
+import { ArrowRight, FileQuestion } from "lucide-react";
+import { findQBItem } from "../curriculum-data";
+import QuestionPdfPanel from "./question-pdf-panel";
 import ContentPdfSection from "@/app/components/content-pdf-section";
 
 export const dynamic = "force-dynamic";
 
-export default async function LessonPlanDetailPage({
+export default async function QuestionBankDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const meta = findWorksheetItem(id);
+  const meta = findQBItem(id);
   if (!meta) notFound();
 
-  const title = `طرح درس ${meta.subjectTitle} — ${meta.item.title}`;
+  const title = `نمونه سوال ${meta.subjectTitle} — ${meta.item.title}`;
 
   return (
     <div className="pb-8">
       <header className="sticky top-0 z-40 flex items-center gap-2 bg-background/90 px-4 py-3 backdrop-blur">
         <Link
-          href="/lesson-plan"
+          href="/question-bank"
           aria-label="بازگشت"
           className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card"
         >
@@ -33,7 +33,7 @@ export default async function LessonPlanDetailPage({
             {meta.item.title}
           </h1>
           <p className="truncate text-xs text-muted">
-            {meta.gradeTitle} · {meta.subjectTitle} · {meta.chapterTitle}
+            {meta.gradeTitle} · {meta.subjectTitle}
           </p>
         </div>
       </header>
@@ -41,8 +41,8 @@ export default async function LessonPlanDetailPage({
       <main className="flex flex-col gap-4 px-4 pt-2">
         <div className="rounded-app border border-border bg-card p-4 shadow-sm">
           <div className="mb-1 flex items-center gap-2 text-primary">
-            <BookOpen size={18} />
-            <span className="text-xs font-bold">عنوان طرح درس</span>
+            <FileQuestion size={18} />
+            <span className="text-xs font-bold">عنوان نمونه سوال</span>
           </div>
           <h2 className="text-base font-bold leading-7 text-foreground">
             {title}
@@ -50,10 +50,10 @@ export default async function LessonPlanDetailPage({
         </div>
 
         <ContentPdfSection
-          kind="lesson-plan"
+          kind="question-bank"
           itemId={id}
           title={title}
-          PdfPanel={LessonPdfPanel}
+          PdfPanel={QuestionPdfPanel}
         />
       </main>
     </div>

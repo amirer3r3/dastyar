@@ -55,7 +55,7 @@ export const educationalContent: ContentCard[] = [
   {
     href: "/question-bank",
     title: "نمونه سوال",
-    description: "بانک سوالات",
+    description: "درس به درس و آزمون نهایی",
     icon: FileQuestion,
     color: "#f59e0b",
   },
