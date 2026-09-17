@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Vazirmatn } from "next/font/google";
+import { Vazirmatn, Lalezar } from "next/font/google";
+import { localFontVariableClasses } from "./lib/project-fonts";
 import "./globals.css";
 import BottomNav from "./components/bottom-nav";
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
   variable: "--font-vazirmatn",
+  display: "swap",
+});
+
+const lalezar = Lalezar({
+  subsets: ["arabic"],
+  weight: "400",
+  variable: "--font-lalezar",
   display: "swap",
 });
 
@@ -19,7 +27,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#4f46e5",
+  themeColor: "#3b6fe0",
 };
 
 export default function RootLayout({
@@ -29,8 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirmatn.variable} antialiased`}>
-        <div className="relative mx-auto min-h-screen max-w-md overflow-x-hidden bg-background pb-[calc(6rem+env(safe-area-inset-bottom))] pt-[env(safe-area-inset-top)] shadow-sm">
+      <body
+        className={`${vazirmatn.variable} ${lalezar.variable} ${localFontVariableClasses} bg-page antialiased`}
+      >
+        <div className="app-shell relative mx-auto min-h-screen max-w-[420px] overflow-x-hidden bg-background pb-[calc(6.5rem+env(safe-area-inset-bottom))] pt-[env(safe-area-inset-top)] shadow-xl">
           {children}
         </div>
         <BottomNav />

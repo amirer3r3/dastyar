@@ -1,0 +1,48 @@
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  /* همه چیز به جز ناحیه چاپ مخفی می‌شود */
+  body * {
+    visibility: hidden;
+  }
+
+  #print-area,
+  #print-area *,
+  #manual-print-area,
+  #manual-print-area * {
+    visibility: visible;
+  }
+
+  #print-area,
+  #manual-print-area {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* خنثی‌سازی مقیاس پیش‌نمایش هنگام چاپ */
+  .sheet-scaler {
+    position: static !important;
+    transform: none !important;
+  }
+
+  .a4-sheet {
+    width: 210mm;
+    min-height: 297mm;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }

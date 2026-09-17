@@ -1,0 +1,28 @@
+OLD:
+.tiptap {
+  outline: none;
+}
+
+NEW:
+.tiptap {
+  outline: none;
+}
+
+/* لوگوی هدر خانه — فقط در HomeHeader استفاده می‌شود */
+.home-header-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 379px) {
+  .home-header-logo {
+    height: 32px;
+    max-width: 36vw;
+  }
+}

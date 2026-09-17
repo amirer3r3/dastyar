@@ -4,11 +4,8 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Editor } from "@tiptap/react";
 import katex from "katex";
-import {
-  GripVertical,
-  Trash2,
-  Image as ImageIcon,
-} from "lucide-react";
+import { GripVertical, Trash2, Image as ImageIcon } from "lucide-react";
+import { formatPersianNumber } from "@/app/lib/persian-digits";
 import RichTextField from "./rich-text-field";
 import type { ManualBlock } from "./types";
 import "katex/dist/katex.min.css";
@@ -17,22 +14,24 @@ type Props = {
   block: ManualBlock;
   index: number;
   selected: boolean;
+  preview: boolean;
+  panMode: boolean;
   onSelect: () => void;
   onChange: (patch: Partial<ManualBlock>) => void;
   onRemove: () => void;
   onActivateEditor: (editor: Editor | null) => void;
-  fontSize: string;
 };
 
 export default function BlockItem({
   block,
   index,
   selected,
+  preview,
+  panMode,
   onSelect,
   onChange,
   onRemove,
   onActivateEditor,
-  fontSize,
 }: Props) {
   const {
     attributes,
@@ -41,77 +40,86 @@ export default function BlockItem({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: block.id });
+  } = useSortable({ id: block.id, disabled: preview || panMode });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    fontSize,
   };
+
+  const questionNumber = index + 1;
 
   return (
     <div
       ref={setNodeRef}
       style={style}
       onClick={onSelect}
-      className={`group relative rounded-xl border bg-white p-3 transition-shadow ${
-        selected
-          ? "border-primary shadow-md shadow-primary/15 ring-2 ring-primary/20"
-          : "border-border/80 shadow-sm"
+      className={`studio-block relative ${
+        selected && !preview
+          ? "rounded-lg ring-2 ring-[var(--studio)]/35"
+          : ""
       } ${isDragging ? "opacity-70" : ""}`}
     >
-      <div className="mb-2 flex items-center justify-between gap-2 no-print">
-        <div className="flex items-center gap-1.5">
+      {!preview ? (
+        <div className="no-print mb-1 flex items-center justify-between gap-2">
           <button
             type="button"
-            className="cursor-grab touch-none text-muted active:cursor-grabbing"
+            className="cursor-grab touch-none text-muted/70 active:cursor-grabbing"
             aria-label="جابجایی"
             {...attributes}
             {...listeners}
           >
-            <GripVertical size={16} />
+            <GripVertical size={15} />
           </button>
-          <span className="text-[11px] font-bold text-muted">
-            {blockLabel(block, index)}
-          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove();
+            }}
+            className="text-danger/80"
+            aria-label="حذف بلاک"
+          >
+            <Trash2 size={14} />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onRemove();
-          }}
-          className="text-danger opacity-70 hover:opacity-100"
-          aria-label="حذف بلاک"
-        >
-          <Trash2 size={15} />
-        </button>
-      </div>
+      ) : null}
 
       {block.type === "question" ||
       block.type === "box" ||
       block.type === "bank-question" ? (
-        <RichTextField
-          html={block.html}
-          onChange={(html) => onChange({ html })}
-          onFocus={() => onSelect()}
-          onEditorReady={(ed) => {
-            if (ed) onActivateEditor(ed);
-          }}
-          placeholder={
-            block.type === "box" ? "متن داخل کادر..." : "متن سوال..."
-          }
-          className={
-            block.type === "box"
-              ? "rounded-lg border-2 border-dashed border-border bg-background/50 px-2 py-1"
-              : "px-1"
-          }
-        />
+        <div className="flex items-start gap-2">
+          {block.type !== "box" ? (
+            <span className="pt-0.5 text-sm font-bold text-gray-800">
+              {formatPersianNumber(questionNumber)}.
+            </span>
+          ) : null}
+          <div className="min-w-0 flex-1">
+            <RichTextField
+              html={block.html}
+              onChange={(html) => onChange({ html })}
+              onFocus={() => onSelect()}
+              onEditorReady={(ed) => {
+                if (ed) onActivateEditor(ed);
+              }}
+              editable={!preview}
+              placeholder={
+                block.type === "box" ? "متن داخل کادر..." : "متن سوال..."
+              }
+              className={
+                block.type === "box"
+                  ? "rounded-md border border-emerald-200 bg-white px-2 py-1"
+                  : "px-0.5"
+              }
+            />
+          </div>
+        </div>
       ) : null}
 
       {block.type === "formula" ? (
         <FormulaView
           latex={block.latex ?? ""}
+          preview={preview}
           onEdit={(latex) => onChange({ latex })}
         />
       ) : null}
@@ -119,6 +127,7 @@ export default function BlockItem({
       {block.type === "image" ? (
         <ImageView
           url={block.imageUrl ?? ""}
+          preview={preview}
           onChangeUrl={(imageUrl) => onChange({ imageUrl })}
         />
       ) : null}
@@ -126,54 +135,42 @@ export default function BlockItem({
       {block.type === "answer-lines" ||
       block.type === "question" ||
       block.type === "bank-question" ? (
-        <div className="mt-3">
+        <div className="mt-2">
           {(block.type === "answer-lines" || block.answerLines > 0) && (
             <AnswerLinesPreview count={block.answerLines || 1} />
           )}
-          <div className="mt-2 flex items-center gap-2 no-print">
-            <label className="text-[11px] text-muted">خطوط پاسخ:</label>
-            <input
-              type="number"
-              min={0}
-              max={20}
-              value={block.answerLines}
-              onClick={(e) => e.stopPropagation()}
-              onChange={(e) =>
-                onChange({ answerLines: Number(e.target.value) || 0 })
-              }
-              className="w-14 rounded-lg border border-border bg-background px-2 py-1 text-xs outline-none focus:border-primary"
-            />
-          </div>
+          {!preview ? (
+            <div className="mt-2 flex items-center gap-2 no-print">
+              <label className="text-[11px] text-muted">خطوط پاسخ:</label>
+              <input
+                type="number"
+                min={0}
+                max={20}
+                value={block.answerLines}
+                onClick={(e) => e.stopPropagation()}
+                onChange={(e) =>
+                  onChange({ answerLines: Number(e.target.value) || 0 })
+                }
+                className="w-14 rounded-lg border border-border bg-background px-2 py-1 text-xs outline-none focus:border-[var(--studio)]"
+              />
+            </div>
+          ) : null}
         </div>
+      ) : null}
+
+      {!preview &&
+      (block.type === "question" || block.type === "bank-question") ? (
+        <div className="studio-flower-divider no-print mt-3" aria-hidden="true" />
       ) : null}
     </div>
   );
 }
 
-function blockLabel(block: ManualBlock, index: number): string {
-  switch (block.type) {
-    case "question":
-      return `سوال ${(index + 1).toLocaleString("fa-IR")}`;
-    case "box":
-      return "کادر / جدول";
-    case "answer-lines":
-      return "خطوط پاسخ";
-    case "formula":
-      return "فرمول";
-    case "image":
-      return "تصویر";
-    case "bank-question":
-      return "از بانک سوالات";
-    default:
-      return "بلاک";
-  }
-}
-
 function AnswerLinesPreview({ count }: { count: number }) {
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-3 pt-1">
       {Array.from({ length: Math.max(0, count) }).map((_, i) => (
-        <div key={i} className="h-0 border-b border-dotted border-gray-400" />
+        <div key={i} className="h-0 border-b border-dotted border-sky-400/80" />
       ))}
     </div>
   );
@@ -181,9 +178,11 @@ function AnswerLinesPreview({ count }: { count: number }) {
 
 function FormulaView({
   latex,
+  preview,
   onEdit,
 }: {
   latex: string;
+  preview: boolean;
   onEdit: (latex: string) => void;
 }) {
   let html = "";
@@ -199,26 +198,30 @@ function FormulaView({
   return (
     <div className="space-y-2">
       <div
-        className="overflow-x-auto rounded-lg bg-background px-2 py-3 text-center"
+        className="overflow-x-auto px-2 py-2 text-center"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      <input
-        dir="ltr"
-        value={latex}
-        onChange={(e) => onEdit(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        className="w-full rounded-lg border border-border bg-background px-2 py-1.5 font-mono text-xs outline-none focus:border-primary"
-        placeholder="LaTeX"
-      />
+      {!preview ? (
+        <input
+          dir="ltr"
+          value={latex}
+          onChange={(e) => onEdit(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          className="no-print w-full rounded-lg border border-border bg-background px-2 py-1.5 font-mono text-xs outline-none"
+          placeholder="LaTeX"
+        />
+      ) : null}
     </div>
   );
 }
 
 function ImageView({
   url,
+  preview,
   onChangeUrl,
 }: {
   url: string;
+  preview: boolean;
   onChangeUrl: (url: string) => void;
 }) {
   return (
@@ -236,15 +239,17 @@ function ImageView({
           <span className="text-xs">تصویری انتخاب نشده</span>
         </div>
       )}
-      <input
-        dir="ltr"
-        type="url"
-        value={url}
-        onChange={(e) => onChangeUrl(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        placeholder="https://..."
-        className="w-full rounded-lg border border-border bg-background px-2 py-1.5 text-xs outline-none focus:border-primary"
-      />
+      {!preview ? (
+        <input
+          dir="ltr"
+          type="url"
+          value={url}
+          onChange={(e) => onChangeUrl(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          placeholder="https://..."
+          className="no-print w-full rounded-lg border border-border bg-background px-2 py-1.5 text-xs outline-none"
+        />
+      ) : null}
     </div>
   );
 }

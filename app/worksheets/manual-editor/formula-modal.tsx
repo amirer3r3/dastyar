@@ -57,7 +57,7 @@ export default function FormulaModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-end justify-center bg-black/40 p-4 sm:items-center">
+    <div className="fixed inset-0 z-[110] flex items-end justify-center bg-black/40 p-4 sm:items-center">
       <div
         role="dialog"
         aria-modal="true"

@@ -1,0 +1,120 @@
+OLD:
+/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */
+:root {
+  --header-doodle-height: 50px;
+}
+
+.header-doodle {
+  display: block;
+  height: var(--header-doodle-height);
+  width: auto;
+  max-width: min(42vw, 11rem);
+  object-fit: cover;
+  object-position: center 12%;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 0.75rem;
+  border: 2px solid rgb(255 255 255 / 0.4);
+}
+
+/* پس‌زمینه تمام‌عرض هدر (بنر) */
+.header-doodle--bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 8%;
+  opacity: 0.38;
+  mix-blend-mode: overlay;
+  border: 0;
+  border-radius: 0;
+}
+
+.home-header .header-doodle--bg {
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+}
+
+@media (max-width: 379px) {
+  :root {
+    --header-doodle-height: 40px;
+  }
+
+  .header-doodle:not(.header-doodle--bg) {
+    max-width: 34vw;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-doodle-height: 56px;
+  }
+}
+
+NEW:
+/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */
+:root {
+  --header-doodle-height: 50px;
+}
+
+.header-doodle-frame {
+  display: block;
+  height: var(--header-doodle-height);
+  width: calc(var(--header-doodle-height) * 1.7);
+  max-width: 42vw;
+  overflow: hidden;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 0.75rem;
+  border: 2px solid rgb(255 255 255 / 0.4);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+}
+
+.header-doodle {
+  display: block;
+  width: 100%;
+  height: 175%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  user-select: none;
+}
+
+.header-doodle--bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 8%;
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+}
+
+.home-header .header-doodle--bg {
+  opacity: 0.45;
+  mix-blend-mode: soft-light;
+}
+
+@media (max-width: 379px) {
+  :root {
+    --header-doodle-height: 40px;
+  }
+
+  .header-doodle-frame {
+    max-width: 34vw;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-doodle-height: 56px;
+  }
+}

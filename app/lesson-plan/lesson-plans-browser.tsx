@@ -3,15 +3,14 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight,
   ChevronDown,
   FileText,
-  Pencil,
   BookOpen,
   GraduationCap,
   Image as ImageIcon,
   FileSpreadsheet,
 } from "lucide-react";
+import SectionBannerHeader from "@/app/components/section-banner/section-banner-header";
 import {
   worksheetGrades,
   getSubject,
@@ -67,28 +66,7 @@ export default function LessonPlansBrowser() {
 
   return (
     <div className="pb-8">
-      <header className="sticky top-0 z-40 flex items-center justify-between gap-3 bg-background/95 px-4 py-3 backdrop-blur">
-        <div className="flex items-center gap-2">
-          <Link
-            href="/"
-            aria-label="بازگشت"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground"
-          >
-            <ArrowRight size={18} />
-          </Link>
-          <div className="flex items-center gap-2">
-            <BookOpen size={20} className="text-primary" />
-            <h1 className="text-base font-bold text-foreground">طرح درس‌ها</h1>
-          </div>
-        </div>
-        <Link
-          href="/lesson-plan/create"
-          className="flex h-9 items-center gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3.5 text-xs font-bold text-primary"
-        >
-          <Pencil size={14} />
-          طراحی
-        </Link>
-      </header>
+      <SectionBannerHeader type="lesson-plan" />
 
       <main className="flex flex-col gap-4 px-4 pt-2">
         <div className="grid grid-cols-2 gap-3">

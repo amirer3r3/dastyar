@@ -8,9 +8,8 @@ import {
   BookOpen,
   FileQuestion,
   ListOrdered,
-  ClipboardList,
   Award,
-  CalendarRange,
+  Mic,
   type LucideIcon,
 } from "lucide-react";
 
@@ -35,6 +34,20 @@ export type ContentCard = {
   description: string;
   icon: LucideIcon;
   color: string;
+  /** گرادیان کارت‌های محتوای آموزشی: [شروع، پایان] */
+  gradient?: [string, string];
+  /** پس‌زمینه‌ی پاستلی آیکون در ابزارهای معلم */
+  tint?: string;
+};
+
+export type TeacherTool = {
+  href: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  /** کلاس گرادیان Tailwind */
+  gradientClass: string;
+  variant: "tall" | "compact";
 };
 
 export const educationalContent: ContentCard[] = [
@@ -43,7 +56,8 @@ export const educationalContent: ContentCard[] = [
     title: "کاربرگ",
     description: "کاربرگ بر اساس پایه و درس",
     icon: FileText,
-    color: "#3b82f6",
+    color: "#4f6fe5",
+    gradient: ["#5b7cfa", "#3b6fe0"],
   },
   {
     href: "/lesson-plan",
@@ -51,6 +65,7 @@ export const educationalContent: ContentCard[] = [
     description: "طرح درس بر اساس پایه و درس",
     icon: BookOpen,
     color: "#16a34a",
+    gradient: ["#34d399", "#16a34a"],
   },
   {
     href: "/question-bank",
@@ -58,36 +73,41 @@ export const educationalContent: ContentCard[] = [
     description: "درس به درس و آزمون نهایی",
     icon: FileQuestion,
     color: "#f59e0b",
+    gradient: ["#fbbf24", "#f97316"],
   },
   {
     href: "/step-by-step",
     title: "گام به گام",
     description: "حل مرحله‌ای",
     icon: ListOrdered,
-    color: "#8b5cf6",
+    color: "#14b8a6",
+    gradient: ["#2dd4bf", "#0d9488"],
   },
 ];
 
-export const teacherTools: ContentCard[] = [
+export const teacherTools: TeacherTool[] = [
   {
-    href: "/quiz",
-    title: "آزمون آنلاین",
-    description: "ساخت و اشتراک‌گذاری آزمون",
-    icon: ClipboardList,
-    color: "#ec4899",
+    href: "/worksheets/create",
+    title: "طراحی کاربرگ و نمونه سوال",
+    description: "ایجاد کاربرگ و سوالات امتحانی",
+    icon: FileText,
+    gradientClass: "bg-gradient-to-b from-[#6358DE] via-[#5651E5] to-[#4572EE]",
+    variant: "tall",
   },
   {
     href: "/certificate",
     title: "تقدیرنامه و برچسب",
-    description: "طراحی کارت تشویقی",
+    description: "طراحی لوح تقدیر",
     icon: Award,
-    color: "#14b8a6",
+    gradientClass: "bg-gradient-to-r from-[#FF517A] to-[#FF8B4C]",
+    variant: "compact",
   },
   {
-    href: "/planner",
-    title: "برنامه هفتگی",
-    description: "تقویم و زمان‌بندی کلاس",
-    icon: CalendarRange,
-    color: "#6366f1",
+    href: "/sound-meter",
+    title: "صدا سنج کلاس",
+    description: "ابزار سنجش و ضبط صدا",
+    icon: Mic,
+    gradientClass: "bg-gradient-to-r from-[#05C9B3] to-[#25D366]",
+    variant: "compact",
   },
 ];

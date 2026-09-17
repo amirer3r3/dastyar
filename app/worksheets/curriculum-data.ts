@@ -95,6 +95,43 @@ function numberedPersian(n: number): string {
 
 /* ========== پایه اول ========== */
 
+const g1FarsiLessons: WorksheetLeaf[] = [
+  leaf("g1-farsi-l1", "درس اول: آا ـ بـ ب"),
+  leaf("g1-farsi-l2", "درس دوم: اَ ـَ ـ د"),
+  leaf("g1-farsi-l3", "درس سوم: مـ م ـ سـ س"),
+  leaf("g1-farsi-l4", "درس چهارم: او و ـ تـ ت"),
+  leaf("g1-farsi-l5", "درس پنجم: ر ـ نـ ن"),
+  leaf("g1-farsi-l6", "درس ششم: ایـ یـ ی ای ـ ز"),
+  leaf("g1-farsi-l7", "درس هفتم: اِ ـِ ـه ه ـ شـ ش"),
+  leaf("g1-farsi-l8", "درس هشتم: یـ ی ـ اُ ـُ"),
+  leaf("g1-farsi-l9", "درس نهم: کـ ک ـ و"),
+  leaf("g1-farsi-l10", "درس دهم: پـ پ ـ گـ گ"),
+  leaf("g1-farsi-l11", "درس یازدهم: فـ ف ـ خـ خ"),
+  leaf("g1-farsi-l12", "درس دوازدهم: قـ ق ـ لـ ل"),
+  leaf("g1-farsi-l13", "درس سیزدهم: جـ ج ـ ـُ استثنا"),
+  leaf("g1-farsi-l14", "درس چهاردهم: هـ ـهـ ـه ه ـ چـ چ"),
+  leaf("g1-farsi-l15", "درس پانزدهم: ژ ـ خوا"),
+  leaf("g1-farsi-l16", "درس شانزدهم: در بازار (تشدید ّ)"),
+  leaf(
+    "g1-farsi-l17",
+    "درس هفدهم: صدای موج (صـ ص) ـ سفر دل‌پذیر (ذ)"
+  ),
+  leaf(
+    "g1-farsi-l18",
+    "درس هجدهم: علی و معصومه (عـ ـعـ ـع ع) ـ مثل خورشید (ثـ ث)"
+  ),
+  leaf("g1-farsi-l19", "درس نوزدهم: حَلزون (حـ ح)"),
+  leaf(
+    "g1-farsi-l20",
+    "درس بیستم: رضا (ضـ ض) ـ خاطرات انقلاب (ط)"
+  ),
+  leaf(
+    "g1-farsi-l21",
+    "درس بیست و یکم: لاک‌پشت و مرغابی‌ها (غـ ـغـ ـغ غ)"
+  ),
+  leaf("g1-farsi-l22", "درس بیست و دوم: پیامبر مهربان (ظ)"),
+];
+
 const g1Farsi = accordionSubject("farsi", "فارسی", [
   chapter(
     "g1-farsi-negareh",
@@ -103,18 +140,7 @@ const g1Farsi = accordionSubject("farsi", "فارسی", [
       leaf(`g1-farsi-negareh-${i + 1}`, `نگاره‌ی ${i + 1}`)
     )
   ),
-  chapter("g1-farsi-u1", "درس‌های اول تا پانزدهم", [
-    ...Array.from({ length: 15 }, (_, i) =>
-      leaf(`g1-farsi-l${i + 1}`, `درس ${numberedPersian(i + 1)}`)
-    ),
-    leaf("g1-farsi-review-1", "تمرین‌های دوره‌ای"),
-  ]),
-  chapter("g1-farsi-u2", "درس‌های شانزدهم تا بیست‌ودوم", [
-    ...Array.from({ length: 7 }, (_, i) =>
-      leaf(`g1-farsi-l${i + 16}`, `درس ${numberedPersian(i + 16)}`)
-    ),
-    leaf("g1-farsi-review-2", "تمرین‌های دوره‌ای"),
-  ]),
+  chapter("g1-farsi-lessons", "درس اول تا درس بیست‌ودوم", g1FarsiLessons),
 ]);
 
 const g1Math = flatSubject(

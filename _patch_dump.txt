@@ -1,0 +1,579 @@
+=== line 270 ===
+OLD:
+/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */
+:root {
+  --header-doodle-height: 50px;
+}
+
+.header-doodle {
+  display: block;
+  height: var(--header-doodle-height);
+  width: auto;
+  max-width: min(42vw, 11rem);
+  object-fit: cover;
+  object-position: center 12%;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 0.75rem;
+  border: 2px solid rgb(255 255 255 / 0.4);
+}
+
+/* پس‌زمینه تمام‌عرض هدر (بنر) */
+.header-doodle--bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 8%;
+  opacity: 0.38;
+  mix-blend-mode: overlay;
+  border: 0;
+  border-radius: 0;
+}
+
+.home-header .header-doodle--bg {
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+}
+
+@media (max-width: 379px) {
+  :root {
+    --header-doodle-height: 40px;
+  }
+
+  .header-doodle:not(.header-doodle--bg) {
+    max-width: 34vw;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-doodle-height: 56px;
+  }
+}
+
+NEW:
+/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */
+:root {
+  --header-doodle-height: 50px;
+}
+
+.header-doodle-frame {
+  display: block;
+  height: var(--header-doodle-height);
+  width: calc(var(--header-doodle-height) * 1.7);
+  max-width: 42vw;
+  overflow: hidden;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 0.75rem;
+  border: 2px solid rgb(255 255 255 / 0.4);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+}
+
+.header-doodle {
+  display: block;
+  width: 100%;
+  height: 175%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  user-select: none;
+}
+
+.header-doodle--bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 8%;
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+}
+
+.home-header .header-doodle--bg {
+  opacity: 0.45;
+  mix-blend-mode: soft-light;
+}
+
+@media (max-width: 379px) {
+  :root {
+    --header-doodle-height: 40px;
+  }
+
+  .header-doodle-frame {
+    max-width: 34vw;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-doodle-height: 56px;
+  }
+}
+
+=== line 290 ===
+OLD:
+.tiptap {
+  outline: none;
+}
+
+NEW:
+.tiptap {
+  outline: none;
+}
+
+/* لوگوی هدر خانه — فقط در HomeHeader استفاده می‌شود */
+.home-header-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 379px) {
+  .home-header-logo {
+    height: 32px;
+    max-width: 36vw;
+  }
+}
+
+=== line 355 ===
+OLD:
+.tiptap {
+  outline: none;
+}
+
+NEW:
+.tiptap {
+  outline: none;
+}
+
+/* تم گل‌وبرگ کاربرگ (پس‌زمینهٔ طراحی‌شده) */
+.worksheet-theme-floral {
+  background-image: url("/worksheets/themes/floral.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.worksheet-floral-title {
+  position: absolute;
+  top: 21mm;
+  left: 50%;
+  z-index: 1;
+  width: 72mm;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 13pt;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #6b4a52;
+}
+
+.worksheet-floral-grade {
+  position: absolute;
+  top: 13mm;
+  left: 20mm;
+  z-index: 1;
+  width: 32mm;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 600;
+  color: #6b4a52;
+}
+
+.worksheet-floral-subject {
+  position: absolute;
+  top: 13mm;
+  right: 20mm;
+  z-index: 1;
+  width: 52mm;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: 600;
+  color: #6b4a52;
+}
+
+.worksheet-floral-body {
+  position: relative;
+  z-index: 1;
+  padding: 56mm 14mm 40mm;
+}
+
+@media print {
+  .worksheet-theme-floral {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+=== line 675 ===
+OLD:
+  .worksheet-preview-stage {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+NEW:
+  .worksheet-preview-stage {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  .worksheet-preview-measure {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+=== line 768 ===
+OLD:
+@media print {
+  .worksheet-theme-floral {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+NEW:
+@media print {
+  .worksheet-theme-floral {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* تم کارتونی کاربرگ (طراحی A4) */
+.worksheet-cartoon-page {
+  width: 210mm;
+  min-height: 297mm;
+  background-color: #fff;
+}
+
+.worksheet-cartoon-page--single,
+.worksheet-cartoon-page--first,
+.worksheet-cartoon-page--last {
+  background-image: url("/worksheets/themes/cartoon.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.worksheet-cartoon-page--first::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52mm;
+  background: #fff;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.worksheet-cartoon-page--middle {
+  border: 2px dashed #f472b6;
+  border-radius: 18px;
+  margin-inline: 4mm;
+  width: calc(210mm - 8mm);
+  box-sizing: border-box;
+}
+
+.worksheet-cartoon-page--last::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(297mm - 54mm);
+  background: #fff;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.worksheet-cartoon-title {
+  position: absolute;
+  top: 46mm;
+  left: 50%;
+  z-index: 2;
+  width: 118mm;
+  max-width: 72%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 14pt;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #0369a1;
+}
+
+.worksheet-cartoon-intro {
+  position: relative;
+  z-index: 2;
+  padding: 68mm 14mm 0;
+}
+
+.worksheet-cartoon-content {
+  position: relative;
+  z-index: 2;
+}
+
+.worksheet-cartoon-content--single {
+  padding: 0 14mm 48mm;
+  margin-top: -6mm;
+}
+
+.worksheet-cartoon-content--first {
+  padding: 0 14mm 12mm;
+  margin-top: -4mm;
+}
+
+.worksheet-cartoon-content--middle {
+  padding: 16mm 12mm;
+  min-height: calc(297mm - 8mm);
+}
+
+.worksheet-cartoon-content--last {
+  padding: 12mm 14mm 50mm;
+  min-height: calc(297mm - 54mm);
+}
+
+@media print {
+  #print-area.worksheet-print-multi {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    min-height: 0 !important;
+    width: 210mm !important;
+  }
+
+  .worksheet-cartoon-page {
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none !important;
+  }
+
+  .worksheet-cartoon-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .worksheet-cartoon-page--single,
+  .worksheet-cartoon-page--first,
+  .worksheet-cartoon-page--last,
+  .worksheet-cartoon-page--middle {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+=== line 843 ===
+OLD:
+/* تم کارتونی کاربرگ (طراحی A4) */
+.worksheet-cartoon-page {
+  width: 210mm;
+  min-height: 297mm;
+  background-color: #fff;
+}
+
+.worksheet-cartoon-page--middle {
+  border: 2px dashed #f472b6;
+  border-radius: 18px;
+  margin-inline: 4mm;
+  width: calc(210mm - 8mm);
+  box-sizing: border-box;
+}
+
+.worksheet-cartoon-title {
+  position: absolute;
+  top: 46mm;
+  left: 50%;
+  z-index: 2;
+  width: 118mm;
+  max-width: 72%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 14pt;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #0369a1;
+}
+
+.worksheet-cartoon-intro {
+  position: relative;
+  z-index: 2;
+  padding: 68mm 14mm 0;
+}
+
+.worksheet-cartoon-content {
+  position: relative;
+  z-index: 2;
+}
+
+.worksheet-cartoon-content--single {
+  padding: 0 14mm 48mm;
+  margin-top: -6mm;
+}
+
+.worksheet-cartoon-content--first {
+  padding: 0 14mm 12mm;
+  margin-top: -4mm;
+}
+
+.worksheet-cartoon-content--middle {
+  padding: 16mm 12mm;
+  min-height: calc(297mm - 8mm);
+}
+
+.worksheet-cartoon-content--last {
+  padding: 12mm 14mm 50mm;
+  min-height: calc(297mm - 54mm);
+}
+
+NEW:
+/* تم کارتونی کاربرگ — هر برگه دقیقاً A4 (210×297mm) */
+.worksheet-cartoon-page {
+  box-sizing: border-box;
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.worksheet-cartoon-page--middle {
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  border: none;
+  background: #fff;
+}
+
+.worksheet-cartoon-page--middle::after {
+  content: "";
+  position: absolute;
+  inset: 9mm;
+  z-index: 1;
+  border: 2px dashed #f472b6;
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+.worksheet-cartoon-title {
+  position: absolute;
+  top: 27mm;
+  left: 50%;
+  z-index: 2;
+  width: 120mm;
+  max-width: 78%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 13pt;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #0369a1;
+}
+
+.worksheet-cartoon-intro {
+  position: absolute;
+  top: 36mm;
+  right: 12mm;
+  left: 12mm;
+  z-index: 2;
+}
+
+.worksheet-cartoon-content {
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.worksheet-cartoon-content--single {
+  top: 56mm;
+  right: 13mm;
+  bottom: 44mm;
+  left: 13mm;
+}
+
+.worksheet-cartoon-content--first {
+  top: 56mm;
+  right: 13mm;
+  bottom: 11mm;
+  left: 13mm;
+}
+
+.worksheet-cartoon-content--middle {
+  top: 14mm;
+  right: 14mm;
+  bottom: 14mm;
+  left: 14mm;
+}
+
+.worksheet-cartoon-content--last {
+  top: 11mm;
+  right: 13mm;
+  bottom: 44mm;
+  left: 13mm;
+}
+
+=== line 843 ===
+OLD:
+  .worksheet-cartoon-page {
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none !important;
+  }
+
+NEW:
+  .worksheet-cartoon-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none !important;
+  }
+
+=== line 1153 ===
+OLD:
+.tiptap {
+  outline: none;
+}
+
+NEW:
+.tiptap {
+  outline: none;
+}
+
+/** ارقام فارسی (Vazirmatn ss01) — canvas، پیش‌نمایش A4، چاپ */
+.persian-nums {
+  font-feature-settings: "ss01" 1;
+  -moz-font-feature-settings: "ss01" 1;
+}
+
+.persian-nums input,
+.persian-nums textarea,
+.persian-nums select,
+.persian-nums [contenteditable="true"] {
+  font-feature-settings: "ss01" 1;
+  -moz-font-feature-settings: "ss01" 1;
+}
+

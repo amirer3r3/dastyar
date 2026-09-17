@@ -14,9 +14,12 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@fontsource-variable/vazirmatn": "^5.2.8",
+    "@tiptap/extension-color": "^3.29.2",
+    "@tiptap/extension-font-family": "^3.29.2",
     "@tiptap/extension-image": "^3.29.2",
     "@tiptap/extension-placeholder": "^3.29.2",
     "@tiptap/extension-text-align": "^3.29.2",
+    "@tiptap/extension-text-style": "^3.29.2",
     "@tiptap/extension-underline": "^3.29.2",
     "@tiptap/react": "^3.29.2",
     "@tiptap/starter-kit": "^3.29.2",
@@ -28,7 +31,8 @@
     "next-auth": "^5.0.0-beta.31",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

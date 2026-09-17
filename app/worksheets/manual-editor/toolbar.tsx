@@ -4,136 +4,267 @@ import type { Editor } from "@tiptap/react";
 import {
   Bold,
   Italic,
-  Underline as UnderlineIcon,
+  Strikethrough,
   AlignRight,
   AlignCenter,
   AlignLeft,
   Sigma,
-  ImagePlus,
-  Columns2,
-  Square,
+  Smile,
+  Table2,
   Type,
+  Palette,
+  ALargeSmall,
+  Copy,
+  Plus,
+  Baseline,
 } from "lucide-react";
+import { WORKSHEET_FONT_OPTIONS as FONTS } from "@/app/lib/project-fonts";
+
+export type StudioToolTab = "text" | "table" | "shapes" | "formula";
 
 type Props = {
   editor: Editor | null;
-  columns: 1 | 2;
-  onToggleColumns: () => void;
+  toolTab: StudioToolTab;
+  onToolTab: (tab: StudioToolTab) => void;
+  onAddText: () => void;
+  onAddTable: () => void;
+  onAddBox: () => void;
+  onAddLines: () => void;
+  onAddImage: () => void;
   onOpenFormula: () => void;
-  onInsertImage: () => void;
   fontSize: string;
   onFontSizeChange: (size: string) => void;
 };
 
-const SIZES = [
-  { label: "کوچک", value: "14px" },
-  { label: "متوسط", value: "16px" },
-  { label: "بزرگ", value: "18px" },
-  { label: "خیلی بزرگ", value: "22px" },
+const TABS: Array<{
+  id: StudioToolTab;
+  label: string;
+  icon: React.ReactNode;
+}> = [
+  { id: "formula", label: "فرمول ریاضی", icon: <Sigma size={20} /> },
+  { id: "shapes", label: "شکل‌ها", icon: <Smile size={20} /> },
+  { id: "table", label: "جدول", icon: <Table2 size={20} /> },
+  { id: "text", label: "ویرایشگر متن", icon: <Type size={20} /> },
 ];
 
-export default function ManualToolbar({
+const SIZES = ["12px", "14px", "16px", "18px", "20px", "22px", "26px"];
+
+export default function StudioToolbar({
   editor,
-  columns,
-  onToggleColumns,
+  toolTab,
+  onToolTab,
+  onAddText,
+  onAddTable,
+  onAddBox,
+  onAddLines,
+  onAddImage,
   onOpenFormula,
-  onInsertImage,
   fontSize,
   onFontSizeChange,
 }: Props) {
   const disabled = !editor;
 
   return (
-    <div className="sticky top-[52px] z-30 flex flex-wrap items-center gap-1.5 rounded-2xl border border-border bg-card p-2 shadow-sm">
-      <select
-        value={fontSize}
-        onChange={(e) => onFontSizeChange(e.target.value)}
-        className="h-9 rounded-xl border border-border bg-background px-2 text-xs font-medium text-foreground outline-none"
-        title="سایز متن"
-      >
-        {SIZES.map((s) => (
-          <option key={s.value} value={s.value}>
-            {s.label}
-          </option>
-        ))}
-      </select>
+    <div className="flex flex-col gap-2.5 px-3">
+      <p className="text-center text-[11px] font-medium text-muted">ابزارها</p>
 
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive("bold")}
-        onClick={() => editor?.chain().focus().toggleBold().run()}
-        label="ضخیم"
-      >
-        <Bold size={15} />
-      </ToolBtn>
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive("italic")}
-        onClick={() => editor?.chain().focus().toggleItalic().run()}
-        label="کج"
-      >
-        <Italic size={15} />
-      </ToolBtn>
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive("underline")}
-        onClick={() => editor?.chain().focus().toggleUnderline().run()}
-        label="زیرخط"
-      >
-        <UnderlineIcon size={15} />
-      </ToolBtn>
+      <div className="grid grid-cols-4 gap-2">
+        {TABS.map((tab) => {
+          const active = toolTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                onToolTab(tab.id);
+                if (tab.id === "formula") onOpenFormula();
+              }}
+              className={`flex flex-col items-center gap-1.5 rounded-2xl border px-1 py-2.5 text-[10px] font-bold transition-colors ${
+                active
+                  ? "border-transparent bg-[var(--studio)] text-white shadow-md shadow-[var(--studio)]/25"
+                  : "border-border bg-card text-foreground"
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
 
-      <span className="mx-0.5 h-6 w-px bg-border" />
+      {toolTab === "text" ? (
+        <div className="studio-subbar no-print flex items-center gap-0.5 overflow-x-auto rounded-2xl border border-border bg-card px-1.5 py-1.5">
+          <ToolBtn
+            label="رنگ"
+            onClick={() => document.getElementById("studio-color")?.click()}
+          >
+            <Palette size={15} />
+            <span className="text-[9px]">رنگ</span>
+          </ToolBtn>
+          <input
+            id="studio-color"
+            type="color"
+            className="sr-only"
+            defaultValue="#111827"
+            onChange={(e) =>
+              editor?.chain().focus().setColor(e.target.value).run()
+            }
+          />
 
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive({ textAlign: "right" })}
-        onClick={() => editor?.chain().focus().setTextAlign("right").run()}
-        label="راست‌چین"
-      >
-        <AlignRight size={15} />
-      </ToolBtn>
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive({ textAlign: "center" })}
-        onClick={() => editor?.chain().focus().setTextAlign("center").run()}
-        label="وسط‌چین"
-      >
-        <AlignCenter size={15} />
-      </ToolBtn>
-      <ToolBtn
-        disabled={disabled}
-        active={editor?.isActive({ textAlign: "left" })}
-        onClick={() => editor?.chain().focus().setTextAlign("left").run()}
-        label="چپ‌چین"
-      >
-        <AlignLeft size={15} />
-      </ToolBtn>
+          <Divider />
 
-      <span className="mx-0.5 h-6 w-px bg-border" />
+          <label className="flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-xl text-[9px] font-medium text-foreground">
+            <ALargeSmall size={15} />
+            اندازه
+            <select
+              value={fontSize}
+              onChange={(e) => {
+                onFontSizeChange(e.target.value);
+                editor
+                  ?.chain()
+                  .focus()
+                  .setMark("textStyle", { fontSize: e.target.value })
+                  .run();
+              }}
+              className="sr-only"
+            >
+              {SIZES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </label>
 
-      <ToolBtn disabled={false} onClick={onOpenFormula} label="فرمول">
-        <Sigma size={15} />
-      </ToolBtn>
-      <ToolBtn disabled={false} onClick={onInsertImage} label="تصویر">
-        <ImagePlus size={15} />
-      </ToolBtn>
-      <ToolBtn
-        disabled={false}
-        active={columns === 2}
-        onClick={onToggleColumns}
-        label="دو ستونه"
-      >
-        <Columns2 size={15} />
-      </ToolBtn>
+          <ToolBtn
+            label="کپی"
+            disabled={disabled}
+            onClick={() => {
+              const text = editor?.state.doc.textBetween(
+                editor.state.selection.from,
+                editor.state.selection.to,
+                " "
+              );
+              if (text) void navigator.clipboard.writeText(text);
+            }}
+          >
+            <Copy size={15} />
+            <span className="text-[9px]">همانندساز</span>
+          </ToolBtn>
 
-      <span className="mr-auto hidden items-center gap-1 text-[10px] text-muted sm:flex">
-        <Type size={12} />
-        <Square size={12} />
-        A4 زنده
-      </span>
+          <Divider />
+
+          <ToolBtn
+            label="راست‌چین"
+            disabled={disabled}
+            active={editor?.isActive({ textAlign: "right" })}
+            onClick={() => editor?.chain().focus().setTextAlign("right").run()}
+          >
+            <AlignRight size={15} />
+          </ToolBtn>
+          <ToolBtn
+            label="وسط"
+            disabled={disabled}
+            active={editor?.isActive({ textAlign: "center" })}
+            onClick={() => editor?.chain().focus().setTextAlign("center").run()}
+          >
+            <AlignCenter size={15} />
+          </ToolBtn>
+          <ToolBtn
+            label="چپ‌چین"
+            disabled={disabled}
+            active={editor?.isActive({ textAlign: "left" })}
+            onClick={() => editor?.chain().focus().setTextAlign("left").run()}
+          >
+            <AlignLeft size={15} />
+          </ToolBtn>
+          <span className="px-0.5 text-[9px] text-muted">چینش</span>
+
+          <Divider />
+
+          <ToolBtn
+            label="ایتالیک"
+            disabled={disabled}
+            active={editor?.isActive("italic")}
+            onClick={() => editor?.chain().focus().toggleItalic().run()}
+          >
+            <Italic size={15} />
+            <span className="text-[9px]">ایتالیک</span>
+          </ToolBtn>
+          <ToolBtn
+            label="ضخیم"
+            disabled={disabled}
+            active={editor?.isActive("bold")}
+            onClick={() => editor?.chain().focus().toggleBold().run()}
+          >
+            <Bold size={15} />
+            <span className="text-[9px]">ضخیم</span>
+          </ToolBtn>
+          <ToolBtn
+            label="خط‌خورده"
+            disabled={disabled}
+            active={editor?.isActive("strike")}
+            onClick={() => editor?.chain().focus().toggleStrike().run()}
+          >
+            <Strikethrough size={15} />
+            <span className="text-[9px]">خط‌خورده</span>
+          </ToolBtn>
+
+          <Divider />
+
+          <label className="flex h-11 shrink-0 flex-col items-center justify-center px-1 text-[9px] font-medium">
+            <Baseline size={15} />
+            فونت
+            <select
+              className="sr-only"
+              onChange={(e) =>
+                editor?.chain().focus().setFontFamily(e.target.value).run()
+              }
+              defaultValue={FONTS[0].value}
+            >
+              {FONTS.map((f) => (
+                <option key={f.label} value={f.value}>
+                  {f.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <ToolBtn label="افزودن متن" onClick={onAddText}>
+            <span className="flex items-center">
+              <Type size={14} />
+              <Plus size={10} className="-mr-0.5" />
+            </span>
+            <span className="text-[9px]">اضافه کردن متن</span>
+          </ToolBtn>
+        </div>
+      ) : null}
+
+      {toolTab === "shapes" ? (
+        <div className="flex gap-2">
+          <SubAction onClick={onAddBox}>کادر</SubAction>
+          <SubAction onClick={onAddLines}>خطوط پاسخ</SubAction>
+          <SubAction onClick={onAddImage}>تصویر</SubAction>
+        </div>
+      ) : null}
+
+      {toolTab === "formula" ? (
+        <div className="flex gap-2">
+          <SubAction onClick={onOpenFormula}>درج فرمول</SubAction>
+        </div>
+      ) : null}
+
+      {toolTab === "table" ? (
+        <div className="flex gap-2">
+          <SubAction onClick={onAddTable}>افزودن جدول</SubAction>
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function Divider() {
+  return <span className="mx-0.5 h-8 w-px shrink-0 bg-border" />;
 }
 
 function ToolBtn({
@@ -156,11 +287,29 @@ function ToolBtn({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors disabled:opacity-40 ${
+      className={`flex h-11 min-w-11 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl px-1.5 transition-colors disabled:opacity-35 ${
         active
-          ? "border-primary bg-primary/10 text-primary"
-          : "border-border bg-background text-foreground"
+          ? "bg-[var(--studio-soft)] text-[var(--studio)]"
+          : "text-foreground"
       }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SubAction({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex-1 rounded-2xl border border-border bg-card py-2 text-xs font-bold text-foreground"
     >
       {children}
     </button>

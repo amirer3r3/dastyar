@@ -1,0 +1,548 @@
+[
+  {
+    "line": 34,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  --primary: #4f46e5;\n  --primary-foreground: #ffffff;\n  --accent: #f59e0b;\n  --success: #16a34a;\n  --danger: #ef4444;\n\n  --radius: 1rem;\n}",
+    "new_string": "  --primary: #4f46e5;\n  --primary-foreground: #ffffff;\n  --accent: #f59e0b;\n  --success: #16a34a;\n  --danger: #ef4444;\n\n  --radius: 1rem;\n  --radius-lg: 1.5rem;\n\n  /* پوسته‌ی صفحه‌ی خانه */\n  --page: #3b6fe0;\n  --header-from: #1e3a8a;\n  --header-to: #3b82f6;\n  --nav-active: #4f6fe5;\n\n  /* گرادیان کارت‌های محتوای آموزشی */\n  --worksheet-from: #6366f1;\n  --worksheet-to: #8b5cf6;\n  --lesson-from: #22c55e;\n  --lesson-to: #16a34a;\n  --question-from: #f59e0b;\n  --question-to: #f97316;\n  --steps-from: #2dd4bf;\n  --steps-to: #8b5cf6;\n}"
+  },
+  {
+    "line": 34,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  --font-sans: var(--font-vazirmatn);\n\n  --radius-app: var(--radius);\n}",
+    "new_string": "  --color-page: var(--page);\n  --color-nav-active: var(--nav-active);\n\n  --font-sans: var(--font-vazirmatn);\n  --font-display: var(--font-lalezar);\n\n  --radius-app: var(--radius);\n  --radius-card: var(--radius-lg);\n}"
+  },
+  {
+    "line": 34,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* Tiptap placeholder */",
+    "new_string": "/* ===== انیمیشن ورود ظریف ===== */\n@keyframes fade-up {\n  from {\n    opacity: 0;\n    transform: translateY(14px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.fade-up {\n  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .fade-up {\n    animation: none;\n  }\n}\n\n/* Tiptap placeholder */"
+  },
+  {
+    "line": 42,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  --radius: 1rem;\n  --radius-lg: 1.5rem;",
+    "new_string": "  --radius: 1rem;\n  --radius-card-size: 1.5rem;"
+  },
+  {
+    "line": 42,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  --radius-card: var(--radius-lg);",
+    "new_string": "  --radius-card: var(--radius-card-size);"
+  },
+  {
+    "line": 51,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "body {\n  background: var(--background);\n  color: var(--foreground);",
+    "new_string": "body {\n  background: var(--page);\n  color: var(--foreground);"
+  },
+  {
+    "line": 259,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".tiptap {\n  outline: none;\n}",
+    "new_string": ".tiptap {\n  outline: none;\n}\n\n/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */\n:root {\n  --header-doodle-height: 50px;\n}\n\n.header-doodle {\n  display: block;\n  height: var(--header-doodle-height);\n  width: auto;\n  max-width: min(42vw, 11rem);\n  object-fit: cover;\n  object-position: center 12%;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n}\n\n/* پس‌زمینه تمام‌عرض هدر (بنر) */\n.header-doodle--bg {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  max-width: none;\n  height: 100%;\n  object-fit: cover;\n  object-position: center 8%;\n  opacity: 0.38;\n  mix-blend-mode: overlay;\n}\n\n.home-header .header-doodle--bg {\n  opacity: 0.55;\n  mix-blend-mode: soft-light;\n}\n\n@media (max-width: 379px) {\n  :root {\n    --header-doodle-height: 40px;\n  }\n\n  .header-doodle:not(.header-doodle--bg) {\n    max-width: 34vw;\n  }\n}\n\n@media (min-width: 640px) {\n  :root {\n    --header-doodle-height: 56px;\n  }\n}"
+  },
+  {
+    "line": 262,
+    "name": "StrReplace",
+    "new_string": ".header-doodle {\n  display: block;\n  height: var(--header-doodle-height);\n  width: auto;\n  max-width: min(42vw, 11rem);\n  object-fit: cover;\n  object-position: center 12%;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n  border-radius: 0.75rem;\n  border: 2px solid rgb(255 255 255 / 0.4);\n}",
+    "old_string": ".header-doodle {\n  display: block;\n  height: var(--header-doodle-height);\n  width: auto;\n  max-width: min(42vw, 11rem);\n  object-fit: cover;\n  object-position: center 12%;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 262,
+    "name": "StrReplace",
+    "new_string": ".header-doodle--bg {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  max-width: none;\n  height: 100%;\n  object-fit: cover;\n  object-position: center 8%;\n  opacity: 0.38;\n  mix-blend-mode: overlay;\n  border: 0;\n  border-radius: 0;\n}",
+    "old_string": ".header-doodle--bg {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  max-width: none;\n  height: 100%;\n  object-fit: cover;\n  object-position: center 8%;\n  opacity: 0.38;\n  mix-blend-mode: overlay;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 270,
+    "name": "StrReplace",
+    "new_string": "/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */\n:root {\n  --header-doodle-height: 50px;\n}\n\n.header-doodle-frame {\n  display: block;\n  height: var(--header-doodle-height);\n  width: calc(var(--header-doodle-height) * 1.7);\n  max-width: 42vw;\n  overflow: hidden;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n  border-radius: 0.75rem;\n  border: 2px solid rgb(255 255 255 / 0.4);\n  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);\n}\n\n.header-doodle {\n  display: block;\n  width: 100%;\n  height: 175%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}\n\n.header-doodle--bg {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  max-width: none;\n  object-fit: cover;\n  object-position: center 8%;\n  opacity: 0.32;\n  mix-blend-mode: overlay;\n}\n\n.home-header .header-doodle--bg {\n  opacity: 0.45;\n  mix-blend-mode: soft-light;\n}\n\n@media (max-width: 379px) {\n  :root {\n    --header-doodle-height: 40px;\n  }\n\n  .header-doodle-frame {\n    max-width: 34vw;\n  }\n}\n\n@media (min-width: 640px) {\n  :root {\n    --header-doodle-height: 56px;\n  }\n}",
+    "old_string": "/* ===== گرافیک تزئینی هدر (.header-doodle) ===== */\n:root {\n  --header-doodle-height: 50px;\n}\n\n.header-doodle {\n  display: block;\n  height: var(--header-doodle-height);\n  width: auto;\n  max-width: min(42vw, 11rem);\n  object-fit: cover;\n  object-position: center 12%;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n  border-radius: 0.75rem;\n  border: 2px solid rgb(255 255 255 / 0.4);\n}\n\n/* پس‌زمینه تمام‌عرض هدر (بنر) */\n.header-doodle--bg {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  max-width: none;\n  height: 100%;\n  object-fit: cover;\n  object-position: center 8%;\n  opacity: 0.38;\n  mix-blend-mode: overlay;\n  border: 0;\n  border-radius: 0;\n}\n\n.home-header .header-doodle--bg {\n  opacity: 0.55;\n  mix-blend-mode: soft-light;\n}\n\n@media (max-width: 379px) {\n  :root {\n    --header-doodle-height: 40px;\n  }\n\n  .header-doodle:not(.header-doodle--bg) {\n    max-width: 34vw;\n  }\n}\n\n@media (min-width: 640px) {\n  :root {\n    --header-doodle-height: 56px;\n  }\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 290,
+    "name": "StrReplace",
+    "new_string": ".tiptap {\n  outline: none;\n}\n\n/* لوگوی هدر خانه — فقط در HomeHeader استفاده می‌شود */\n.home-header-logo {\n  display: block;\n  height: 40px;\n  width: auto;\n  max-width: 42vw;\n  object-fit: contain;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n}\n\n@media (max-width: 379px) {\n  .home-header-logo {\n    height: 32px;\n    max-width: 36vw;\n  }\n}",
+    "old_string": ".tiptap {\n  outline: none;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 296,
+    "name": "StrReplace",
+    "new_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center bottom;\n  pointer-events: none;\n  user-select: none;\n}",
+    "old_string": "/* لوگوی هدر خانه — فقط در HomeHeader استفاده می‌شود */\n.home-header-logo {\n  display: block;\n  height: 40px;\n  width: auto;\n  max-width: 42vw;\n  object-fit: contain;\n  flex-shrink: 0;\n  pointer-events: none;\n  user-select: none;\n}\n\n@media (max-width: 379px) {\n  .home-header-logo {\n    height: 32px;\n    max-width: 36vw;\n  }\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 298,
+    "name": "StrReplace",
+    "new_string": ".home-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}",
+    "old_string": ".home-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center bottom;\n  pointer-events: none;\n  user-select: none;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 315,
+    "name": "StrReplace",
+    "new_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header {\n  /* خط موج آبی بنر در محور آواتار (left ≈ 50px) — متناسب با object-fit: cover */\n  --home-header-wave-y: 37.9%;\n}\n\n.home-header__avatar {\n  top: var(--home-header-wave-y);\n}\n\n.home-header-banner {",
+    "old_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header-banner {",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 326,
+    "name": "StrReplace",
+    "new_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header-banner {",
+    "old_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header {\n  /* خط موج آبی بنر در محور آواتار (left ≈ 50px) — متناسب با object-fit: cover */\n  --home-header-wave-y: 37.9%;\n}\n\n.home-header__avatar {\n  top: var(--home-header-wave-y);\n}\n\n.home-header-banner {",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 347,
+    "name": "StrReplace",
+    "new_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header__avatar {\n  /* خط موج بنر در سمت چپ (viewBox ≈ y:377 → 118px با object-fit:cover) */\n  top: 118px;\n  transform: translateY(-50%);\n}\n\n.home-header-banner {",
+    "old_string": "/* بنر SVG هدر خانه — تمام‌عرض، همان ارتفاع h-[140px] */\n.home-header-banner {",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 355,
+    "name": "StrReplace",
+    "new_string": ".tiptap {\n  outline: none;\n}\n\n/* تم گل‌وبرگ کاربرگ (پس‌زمینهٔ طراحی‌شده) */\n.worksheet-theme-floral {\n  background-image: url(\"/worksheets/themes/floral.webp\");\n  background-repeat: no-repeat;\n  background-size: 100% 100%;\n  background-position: center;\n}\n\n.worksheet-floral-title {\n  position: absolute;\n  top: 21mm;\n  left: 50%;\n  z-index: 1;\n  width: 72mm;\n  transform: translateX(-50%);\n  text-align: center;\n  font-size: 13pt;\n  font-weight: 700;\n  line-height: 1.5;\n  color: #6b4a52;\n}\n\n.worksheet-floral-grade {\n  position: absolute;\n  top: 13mm;\n  left: 20mm;\n  z-index: 1;\n  width: 32mm;\n  text-align: center;\n  font-size: 11pt;\n  font-weight: 600;\n  color: #6b4a52;\n}\n\n.worksheet-floral-subject {\n  position: absolute;\n  top: 13mm;\n  right: 20mm;\n  z-index: 1;\n  width: 52mm;\n  text-align: center;\n  font-size: 10pt;\n  font-weight: 600;\n  color: #6b4a52;\n}\n\n.worksheet-floral-body {\n  position: relative;\n  z-index: 1;\n  padding: 56mm 14mm 40mm;\n}\n\n@media print {\n  .worksheet-theme-floral {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}",
+    "old_string": ".tiptap {\n  outline: none;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 360,
+    "name": "StrReplace",
+    "new_string": ".worksheet-floral-grade {\n  position: absolute;\n  top: 13mm;\n  left: 20mm;\n  z-index: 1;\n  width: 32mm;\n  text-align: center;\n  font-size: 11pt;\n  font-weight: 600;\n  color: #6b4a52;\n}\n\n.worksheet-floral-body {",
+    "old_string": ".worksheet-floral-grade {\n  position: absolute;\n  top: 13mm;\n  left: 20mm;\n  z-index: 1;\n  width: 32mm;\n  text-align: center;\n  font-size: 11pt;\n  font-weight: 600;\n  color: #6b4a52;\n}\n\n.worksheet-floral-subject {\n  position: absolute;\n  top: 13mm;\n  right: 20mm;\n  z-index: 1;\n  width: 52mm;\n  text-align: center;\n  font-size: 10pt;\n  font-weight: 600;\n  color: #6b4a52;\n}\n\n.worksheet-floral-body {",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 395,
+    "name": "StrReplace",
+    "new_string": ".home-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}\n\n/* بنر هدر کاربرگ‌ها */\n.worksheets-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}\n",
+    "old_string": ".home-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 406,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر کاربرگ‌ها — تمام‌عرض، بدون برش */\n.worksheets-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "old_string": "/* بنر هدر کاربرگ‌ها */\n.worksheets-header-banner {\n  position: absolute;\n  inset: 0;\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  object-position: center top;\n  pointer-events: none;\n  user-select: none;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 416,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر بخش‌ها — تمام‌عرض، بدون برش */\n.section-banner-image {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "old_string": "/* بنر هدر کاربرگ‌ها — تمام‌عرض، بدون برش */\n.worksheets-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 423,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر بخش‌ها — تمام‌عرض، بدون برش */\n.section-banner-image {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n",
+    "old_string": "/* بنر هدر بخش‌ها — تمام‌عرض، بدون برش */\n.section-banner-image {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 430,
+    "name": "StrReplace",
+    "new_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n\n/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */\n.lesson-plan-section {\n  --primary: #065f46;\n  --primary-foreground: #ffffff;\n  --color-primary: #065f46;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "old_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 432,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر بخش‌ها — تمام‌عرض، بدون برش */\n.section-banner-image {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n\n/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */\n.lesson-plan-section {\n  --primary: #065f46;\n  --primary-foreground: #ffffff;\n  --color-primary: #065f46;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "old_string": "/* بنر هدر بخش‌ها — تمام‌عرض، بدون برش */\n.section-banner-image {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 440,
+    "name": "StrReplace",
+    "new_string": "/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */\n.lesson-plan-section {\n  --primary: #065f46;\n  --primary-foreground: #ffffff;\n  --color-primary: #065f46;\n  --color-primary-foreground: #ffffff;\n}\n\n/* تم نارنجی تیره — فقط بخش نمونه سوال (هماهنگ با هدر) */\n.sample-question-section {\n  --primary: #c2410c;\n  --primary-foreground: #ffffff;\n  --color-primary: #c2410c;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "old_string": "/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */\n.lesson-plan-section {\n  --primary: #065f46;\n  --primary-foreground: #ffffff;\n  --color-primary: #065f46;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 460,
+    "name": "StrReplace",
+    "new_string": "/* تم نارنجی تیره — فقط بخش نمونه سوال (هماهنگ با هدر) */\n.sample-question-section {\n  --primary: #c2410c;\n  --primary-foreground: #ffffff;\n  --color-primary: #c2410c;\n  --color-primary-foreground: #ffffff;\n}\n\n/* تم فیروزه‌ای تیره — فقط بخش گام‌به‌گام (هماهنگ با هدر) */\n.step-by-step-section {\n  --primary: #0e7490;\n  --primary-foreground: #ffffff;\n  --color-primary: #0e7490;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "old_string": "/* تم نارنجی تیره — فقط بخش نمونه سوال (هماهنگ با هدر) */\n.sample-question-section {\n  --primary: #c2410c;\n  --primary-foreground: #ffffff;\n  --color-primary: #c2410c;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 466,
+    "name": "StrReplace",
+    "new_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n\n/* بنر هدر صفحه طراحی کاربرگ — نسبت 1024×682 */\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "old_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 473,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ — نسبت دقیق 1024×682 */\n.worksheet-design-header-frame {\n  aspect-ratio: 1024 / 682;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  object-position: center top;\n  vertical-align: top;\n}\n",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ — نسبت 1024×682 */\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 476,
+    "name": "StrReplace",
+    "new_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n\n/* بنر هدر صفحه طراحی کاربرگ — نسبت دقیق 1024×682 */\n.worksheet-design-header-frame {\n  aspect-ratio: 1024 / 682;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  object-position: center top;\n}\n\n/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */",
+    "old_string": ".section-banner-bottom-fade {\n  height: 52%;\n  min-height: 3.5rem;\n}\n\n/* تم سبز تیره — فقط بخش طرح درس (هماهنگ با هدر) */",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 482,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ — نسبت دقیق 1024×682 */\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ — نسبت دقیق 1024×682 */\n.worksheet-design-header-frame {\n  aspect-ratio: 1024 / 682;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  object-position: center top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 489,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: #f5f3ff;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ — نسبت دقیق 1024×682 */\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 496,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: #ffffff;\n}\n\n.worksheet-design-header-inner {\n  background: #ffffff;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.worksheet-design-header-fade {\n  height: 58%;\n  min-height: 4rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(255, 255, 255, 0.15) 28%,\n    rgba(246, 247, 251, 0.55) 62%,\n    rgba(246, 247, 251, 0.92) 88%,\n    var(--background) 100%\n  );\n}\n",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: #f5f3ff;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 512,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: #f5f4fb;\n}\n\n.worksheet-design-header-inner {\n  background: #f5f4fb;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.worksheet-design-header-fade {\n  height: 28%;\n  max-height: 4.25rem;\n  min-height: 2.25rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(236, 234, 248, 0.22) 55%,\n    rgba(224, 222, 244, 0.78) 88%,\n    var(--background) 100%\n  );\n}\n",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: #ffffff;\n}\n\n.worksheet-design-header-inner {\n  background: #ffffff;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.worksheet-design-header-fade {\n  height: 58%;\n  min-height: 4rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(255, 255, 255, 0.15) 28%,\n    rgba(246, 247, 251, 0.55) 62%,\n    rgba(246, 247, 251, 0.92) 88%,\n    var(--background) 100%\n  );\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 516,
+    "name": "StrReplace",
+    "new_string": ".worksheet-design-header-inner {\n  background: var(--background);\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n  -webkit-mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n  mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n}\n\n.worksheet-design-header-fade {\n  height: 34%;\n  max-height: 4.75rem;\n  min-height: 2.5rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(236, 234, 248, 0.12) 38%,\n    rgba(224, 222, 244, 0.52) 72%,\n    rgba(246, 247, 251, 0.88) 92%,\n    var(--background) 100%\n  );\n}\n",
+    "old_string": ".worksheet-design-header-inner {\n  background: #f5f4fb;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.worksheet-design-header-fade {\n  height: 28%;\n  max-height: 4.25rem;\n  min-height: 2.25rem;\n  background: linear-gradient(\n    to bottom,\n    rgba(236, 234, 248, 0.22) 55%,\n    rgba(224, 222, 244, 0.78) 88%,\n    var(--background) 100%\n  );\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 517,
+    "name": "StrReplace",
+    "new_string": ".worksheet-design-header-inner {\n  background: var(--background);\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n  -webkit-mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n  mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n}\n\n.worksheet-design-header-fade {\n  height: 34%;\n  max-height: 4.75rem;\n  min-height: 2.5rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(236, 234, 248, 0.12) 38%,\n    rgba(224, 222, 244, 0.52) 72%,\n    rgba(246, 247, 251, 0.88) 92%,\n    var(--background) 100%\n  );\n}",
+    "old_string": ".worksheet-design-header-inner {\n  background: #f5f4fb;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n}\n\n.worksheet-design-header-fade {\n  height: 28%;\n  max-height: 4.25rem;\n  min-height: 2.25rem;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    rgba(236, 234, 248, 0.22) 55%,\n    rgba(224, 222, 244, 0.78) 88%,\n    var(--background) 100%\n  );\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 518,
+    "name": "StrReplace",
+    "new_string": ".worksheet-design-header {\n  background: var(--background);\n}",
+    "old_string": ".worksheet-design-header {\n  background: #f5f4fb;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 526,
+    "name": "StrReplace",
+    "new_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: var(--background);\n  border-radius: 0;\n}\n\n.worksheet-design-header-inner {\n  background: var(--background);\n  overflow: hidden;\n  border-radius: 0;\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n  border-radius: 0;\n  margin: 0;\n  padding: 0;\n  line-height: 0;\n  -webkit-mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n  mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n}",
+    "old_string": "/* بنر هدر صفحه طراحی کاربرگ */\n.worksheet-design-header {\n  background: var(--background);\n}\n\n.worksheet-design-header-inner {\n  background: var(--background);\n}\n\n.worksheet-design-header-banner {\n  display: block;\n  width: 100%;\n  height: auto;\n  vertical-align: top;\n  -webkit-mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n  mask-image: linear-gradient(\n    to bottom,\n    #000 0%,\n    #000 76%,\n    rgba(0, 0, 0, 0.92) 86%,\n    rgba(0, 0, 0, 0.55) 94%,\n    transparent 100%\n  );\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 546,
+    "name": "StrReplace",
+    "new_string": "/* تم فیروزه‌ای تیره — فقط بخش گام‌به‌گام (هماهنگ با هدر) */\n.step-by-step-section {\n  --primary: #0e7490;\n  --primary-foreground: #ffffff;\n  --color-primary: #0e7490;\n  --color-primary-foreground: #ffffff;\n}\n\n/* محیط تمام‌صفحه طراحی دستی کاربرگ */\n.manual-studio {\n  --studio: #0f7a4c;\n  --studio-soft: #e7f6ee;\n}\n\n.studio-subbar {\n  scrollbar-width: none;\n}\n.studio-subbar::-webkit-scrollbar {\n  display: none;\n}\n\n.studio-sheet {\n  position: relative;\n  overflow: hidden;\n  background: #fff;\n  color: #1f2937;\n  border-radius: 18px;\n  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);\n  border: 1px solid #d7eee2;\n}\n\n.studio-sheet-ornament {\n  pointer-events: none;\n  position: absolute;\n  inset: 10px;\n  border: 1.5px solid #b7ddc8;\n  border-radius: 12px;\n}\n\n.studio-sheet-ornament::before,\n.studio-sheet-ornament::after {\n  content: \"\";\n  position: absolute;\n  width: 28px;\n  height: 28px;\n  border: 2px solid #0f7a4c;\n  opacity: 0.45;\n}\n.studio-sheet-ornament::before {\n  top: -2px;\n  right: -2px;\n  border-left: 0;\n  border-bottom: 0;\n  border-radius: 0 8px 0 0;\n}\n.studio-sheet-ornament::after {\n  bottom: -2px;\n  left: -2px;\n  border-right: 0;\n  border-top: 0;\n  border-radius: 0 0 0 8px;\n}\n\n.studio-bismillah-mark {\n  display: block;\n  width: 22px;\n  height: 22px;\n  background: radial-gradient(circle at 50% 50%, #0f7a4c 0 28%, transparent 30%),\n    conic-gradient(from 30deg, #0f7a4c, #7dcea0, #0f7a4c);\n  mask: radial-gradient(circle, #000 55%, transparent 56%);\n  border-radius: 50%;\n}\n\n.studio-flower-divider {\n  height: 14px;\n  background: radial-gradient(circle at 50% 50%, #0f7a4c 0 2px, transparent 2.5px),\n    linear-gradient(90deg, transparent 0 46%, #cde8d8 46% 54%, transparent 54%);\n  background-repeat: no-repeat;\n  background-position: center;\n}\n\n.studio-table {\n  width: 100%;\n  border-collapse: collapse;\n  font-size: 12px;\n}\n.studio-table th,\n.studio-table td {\n  border: 1px solid #c5ddd0;\n  padding: 6px 8px;\n  min-width: 4rem;\n}\n.studio-table th {\n  background: #eef8f2;\n  font-weight: 700;\n}\n",
+    "old_string": "/* تم فیروزه‌ای تیره — فقط بخش گام‌به‌گام (هماهنگ با هدر) */\n.step-by-step-section {\n  --primary: #0e7490;\n  --primary-foreground: #ffffff;\n  --color-primary: #0e7490;\n  --color-primary-foreground: #ffffff;\n}\n",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 567,
+    "name": "StrReplace",
+    "new_string": ".studio-subbar {\n  scrollbar-width: none;\n  flex-wrap: nowrap;\n}\n.studio-subbar::-webkit-scrollbar {\n  display: none;\n}",
+    "old_string": ".studio-subbar {\n  scrollbar-width: none;\n}\n.studio-subbar::-webkit-scrollbar {\n  display: none;\n}",
+    "path": "d:\\dastyar-moallem\\app\\globals.css"
+  },
+  {
+    "line": 603,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .a4-sheet {\n    width: 210mm;\n    min-height: 297mm;\n    box-shadow: none !important;\n    border-radius: 0 !important;\n    margin: 0 !important;\n  }",
+    "new_string": "  .a4-sheet {\n    width: 210mm;\n    min-height: 297mm;\n    box-shadow: none !important;\n    border-radius: 0 !important;\n    margin: 0 !important;\n  }\n\n  #manual-print-area .studio-sheet {\n    page-break-after: always;\n    break-after: page;\n  }\n\n  #manual-print-area .studio-sheet:last-child {\n    page-break-after: auto;\n    break-after: auto;\n  }"
+  },
+  {
+    "line": 611,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".tiptap {\n  outline: none;\n}",
+    "new_string": ".tiptap {\n  outline: none;\n}\n\n.manual-studio .tiptap,\n.manual-studio .ProseMirror,\n.manual-studio .ProseMirror:focus {\n  outline: none !important;\n  box-shadow: none !important;\n}"
+  },
+  {
+    "line": 674,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "@media print {\n  @page {\n    size: A4;\n    margin: 0;\n  }\n\n  html,\n  body {\n    background: #ffffff !important;\n  }\n\n  /* همه چیز به جز ناحیه چاپ مخفی می‌شود */\n  body * {\n    visibility: hidden;\n  }\n\n  #print-area,\n  #print-area *,\n  #manual-print-area,\n  #manual-print-area * {\n    visibility: visible;\n  }\n\n  #print-area,\n  #manual-print-area {\n    position: absolute;\n    inset: 0;\n    margin: 0;\n    padding: 0;\n  }\n\n  .no-print {\n    display: none !important;\n  }\n\n  /* خنثی‌سازی مقیاس پیش‌نمایش هنگام چاپ */\n  .sheet-scaler {\n    position: static !important;\n    transform: none !important;\n  }\n\n  .a4-sheet {\n    width: 210mm;\n    min-height: 297mm;\n    box-shadow: none !important;\n    border-radius: 0 !important;\n    margin: 0 !important;\n  }",
+    "new_string": "@media print {\n  @page {\n    size: A4 portrait;\n    margin: 0;\n  }\n\n  html,\n  body {\n    background: #ffffff !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    width: auto !important;\n    height: auto !important;\n    overflow: visible !important;\n  }\n\n  .no-print,\n  .print-hide {\n    display: none !important;\n  }\n\n  .app-shell {\n    max-width: none !important;\n    width: 100% !important;\n    min-height: 0 !important;\n    overflow: visible !important;\n    padding: 0 !important;\n    margin: 0 !important;\n    box-shadow: none !important;\n    background: #ffffff !important;\n  }\n\n  /* پیش‌نمایش کاربرگ: بدون scale و بدون برش ارتفاع */\n  .worksheet-preview-stage {\n    height: auto !important;\n    min-height: 0 !important;\n    overflow: visible !important;\n    width: 100% !important;\n  }\n\n  .worksheet-preview-scaler,\n  .sheet-scaler {\n    position: static !important;\n    transform: none !important;\n    width: 210mm !important;\n    max-width: none !important;\n    margin: 0 auto !important;\n  }\n\n  #print-area {\n    visibility: visible !important;\n    display: block !important;\n    position: relative !important;\n    inset: auto !important;\n    width: 210mm !important;\n    min-height: 297mm !important;\n    max-width: none !important;\n    margin: 0 auto !important;\n    padding: 0 !important;\n    box-shadow: none !important;\n    overflow: visible !important;\n    page-break-inside: avoid;\n  }\n\n  #print-area * {\n    visibility: visible !important;\n  }\n\n  #manual-print-area {\n    position: relative !important;\n    inset: auto !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    transform: none !important;\n  }\n\n  .a4-sheet {\n    width: 210mm !important;\n    min-height: 297mm !important;\n    max-width: none !important;\n    box-shadow: none !important;\n    border-radius: 0 !important;\n    margin: 0 auto !important;\n  }"
+  },
+  {
+    "line": 675,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .worksheet-preview-stage {\n    height: auto !important;\n    min-height: 0 !important;\n    overflow: visible !important;\n    width: 100% !important;\n  }",
+    "new_string": "  .worksheet-preview-stage {\n    height: auto !important;\n    min-height: 0 !important;\n    overflow: visible !important;\n    width: 100% !important;\n  }\n\n  .worksheet-preview-measure {\n    height: auto !important;\n    min-height: 0 !important;\n    overflow: visible !important;\n  }"
+  },
+  {
+    "line": 768,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "@media print {\n  .worksheet-theme-floral {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}",
+    "new_string": "@media print {\n  .worksheet-theme-floral {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}\n\n/* تم کارتونی کاربرگ (طراحی A4) */\n.worksheet-cartoon-page {\n  width: 210mm;\n  min-height: 297mm;\n  background-color: #fff;\n}\n\n.worksheet-cartoon-page--single,\n.worksheet-cartoon-page--first,\n.worksheet-cartoon-page--last {\n  background-image: url(\"/worksheets/themes/cartoon.webp\");\n  background-repeat: no-repeat;\n  background-size: 100% 100%;\n  background-position: center;\n}\n\n.worksheet-cartoon-page--first::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 52mm;\n  background: #fff;\n  z-index: 0;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-page--middle {\n  border: 2px dashed #f472b6;\n  border-radius: 18px;\n  margin-inline: 4mm;\n  width: calc(210mm - 8mm);\n  box-sizing: border-box;\n}\n\n.worksheet-cartoon-page--last::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: calc(297mm - 54mm);\n  background: #fff;\n  z-index: 0;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-title {\n  position: absolute;\n  top: 46mm;\n  left: 50%;\n  z-index: 2;\n  width: 118mm;\n  max-width: 72%;\n  transform: translateX(-50%);\n  text-align: center;\n  font-size: 14pt;\n  font-weight: 800;\n  line-height: 1.45;\n  color: #0369a1;\n}\n\n.worksheet-cartoon-intro {\n  position: relative;\n  z-index: 2;\n  padding: 68mm 14mm 0;\n}\n\n.worksheet-cartoon-content {\n  position: relative;\n  z-index: 2;\n}\n\n.worksheet-cartoon-content--single {\n  padding: 0 14mm 48mm;\n  margin-top: -6mm;\n}\n\n.worksheet-cartoon-content--first {\n  padding: 0 14mm 12mm;\n  margin-top: -4mm;\n}\n\n.worksheet-cartoon-content--middle {\n  padding: 16mm 12mm;\n  min-height: calc(297mm - 8mm);\n}\n\n.worksheet-cartoon-content--last {\n  padding: 12mm 14mm 50mm;\n  min-height: calc(297mm - 54mm);\n}\n\n@media print {\n  #print-area.worksheet-print-multi {\n    page-break-inside: auto !important;\n    break-inside: auto !important;\n    min-height: 0 !important;\n    width: 210mm !important;\n  }\n\n  .worksheet-cartoon-page {\n    page-break-after: always;\n    break-after: page;\n    box-shadow: none !important;\n  }\n\n  .worksheet-cartoon-page:last-child {\n    page-break-after: auto;\n    break-after: auto;\n  }\n\n  .worksheet-cartoon-page--single,\n  .worksheet-cartoon-page--first,\n  .worksheet-cartoon-page--last,\n  .worksheet-cartoon-page--middle {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}"
+  },
+  {
+    "line": 773,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "background-image: url(\"/worksheets/themes/cartoon.webp\");",
+    "new_string": "background-image: url(\"/worksheets/themes/cartoon.png\");"
+  },
+  {
+    "line": 782,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-page--single,\n.worksheet-cartoon-page--first,\n.worksheet-cartoon-page--last {\n  background-image: url(\"/worksheets/themes/cartoon.png\");\n  background-repeat: no-repeat;\n  background-size: 100% 100%;\n  background-position: center;\n}\n\n.worksheet-cartoon-page--first::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 52mm;\n  background: #fff;\n  z-index: 0;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-page--middle {",
+    "new_string": ".worksheet-cartoon-page--middle {"
+  },
+  {
+    "line": 782,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-page--last::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: calc(297mm - 54mm);\n  background: #fff;\n  z-index: 0;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-title {",
+    "new_string": ".worksheet-cartoon-title {"
+  },
+  {
+    "line": 782,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .worksheet-cartoon-page--single,\n  .worksheet-cartoon-page--first,\n  .worksheet-cartoon-page--last,\n  .worksheet-cartoon-page--middle {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}",
+    "new_string": "  .worksheet-cartoon-page img[alt=\"\"] {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n\n  .worksheet-cartoon-page--middle {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}"
+  },
+  {
+    "line": 806,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .worksheet-cartoon-page img[alt=\"\"] {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }",
+    "new_string": "  .worksheet-cartoon-page img[alt=\"\"],\n  .worksheet-cartoon-page object {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }"
+  },
+  {
+    "line": 843,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* تم کارتونی کاربرگ (طراحی A4) */\n.worksheet-cartoon-page {\n  width: 210mm;\n  min-height: 297mm;\n  background-color: #fff;\n}\n\n.worksheet-cartoon-page--middle {\n  border: 2px dashed #f472b6;\n  border-radius: 18px;\n  margin-inline: 4mm;\n  width: calc(210mm - 8mm);\n  box-sizing: border-box;\n}\n\n.worksheet-cartoon-title {\n  position: absolute;\n  top: 46mm;\n  left: 50%;\n  z-index: 2;\n  width: 118mm;\n  max-width: 72%;\n  transform: translateX(-50%);\n  text-align: center;\n  font-size: 14pt;\n  font-weight: 800;\n  line-height: 1.45;\n  color: #0369a1;\n}\n\n.worksheet-cartoon-intro {\n  position: relative;\n  z-index: 2;\n  padding: 68mm 14mm 0;\n}\n\n.worksheet-cartoon-content {\n  position: relative;\n  z-index: 2;\n}\n\n.worksheet-cartoon-content--single {\n  padding: 0 14mm 48mm;\n  margin-top: -6mm;\n}\n\n.worksheet-cartoon-content--first {\n  padding: 0 14mm 12mm;\n  margin-top: -4mm;\n}\n\n.worksheet-cartoon-content--middle {\n  padding: 16mm 12mm;\n  min-height: calc(297mm - 8mm);\n}\n\n.worksheet-cartoon-content--last {\n  padding: 12mm 14mm 50mm;\n  min-height: calc(297mm - 54mm);\n}",
+    "new_string": "/* تم کارتونی کاربرگ — هر برگه دقیقاً A4 (210×297mm) */\n.worksheet-cartoon-page {\n  box-sizing: border-box;\n  width: 210mm;\n  height: 297mm;\n  min-height: 297mm;\n  max-height: 297mm;\n  flex-shrink: 0;\n  overflow: hidden;\n  background-color: #fff;\n}\n\n.worksheet-cartoon-page--middle {\n  width: 210mm;\n  height: 297mm;\n  margin: 0;\n  border: none;\n  background: #fff;\n}\n\n.worksheet-cartoon-page--middle::after {\n  content: \"\";\n  position: absolute;\n  inset: 9mm;\n  z-index: 1;\n  border: 2px dashed #f472b6;\n  border-radius: 16px;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-title {\n  position: absolute;\n  top: 27mm;\n  left: 50%;\n  z-index: 2;\n  width: 120mm;\n  max-width: 78%;\n  transform: translateX(-50%);\n  text-align: center;\n  font-size: 13pt;\n  font-weight: 800;\n  line-height: 1.45;\n  color: #0369a1;\n}\n\n.worksheet-cartoon-intro {\n  position: absolute;\n  top: 36mm;\n  right: 12mm;\n  left: 12mm;\n  z-index: 2;\n}\n\n.worksheet-cartoon-content {\n  position: absolute;\n  z-index: 2;\n  overflow: hidden;\n}\n\n.worksheet-cartoon-content--single {\n  top: 56mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--first {\n  top: 56mm;\n  right: 13mm;\n  bottom: 11mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--middle {\n  top: 14mm;\n  right: 14mm;\n  bottom: 14mm;\n  left: 14mm;\n}\n\n.worksheet-cartoon-content--last {\n  top: 11mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}"
+  },
+  {
+    "line": 843,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .worksheet-cartoon-page {\n    page-break-after: always;\n    break-after: page;\n    box-shadow: none !important;\n  }",
+    "new_string": "  .worksheet-cartoon-page {\n    width: 210mm !important;\n    height: 297mm !important;\n    min-height: 297mm !important;\n    max-height: 297mm !important;\n    page-break-after: always;\n    break-after: page;\n    box-shadow: none !important;\n  }"
+  },
+  {
+    "line": 867,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-content--single {\n  top: 56mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--first {\n  top: 56mm;\n  right: 13mm;\n  bottom: 11mm;\n  left: 13mm;\n}",
+    "new_string": ".worksheet-cartoon-content--single {\n  /* زیر نوار آبی و خط جداکنندهٔ سربرگ در newcartoontheme.svg (~y232 → ~82mm + حاشیه) */\n  top: 93mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--first {\n  top: 93mm;\n  right: 13mm;\n  bottom: 11mm;\n  left: 13mm;\n}"
+  },
+  {
+    "line": 881,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-page--middle::after {\n  content: \"\";\n  position: absolute;\n  inset: 9mm;\n  z-index: 1;\n  border: 2px dashed #f472b6;\n  border-radius: 16px;\n  pointer-events: none;\n}\n\n.worksheet-cartoon-title {",
+    "new_string": ".worksheet-cartoon-title {"
+  },
+  {
+    "line": 881,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-content--last {\n  top: 11mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}",
+    "new_string": ".worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 48mm;\n  left: 14mm;\n}"
+  },
+  {
+    "line": 884,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  /* زیر نوار آبی و خط جداکنندهٔ سربرگ در newcartoontheme.svg (~y232 → ~82mm + حاشیه) */",
+    "new_string": "  /* زیر نوار آبی و خط جداکنندهٔ سربرگ car1.svg */"
+  },
+  {
+    "line": 894,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-content--single {\n  /* زیر نوار آبی و خط جداکنندهٔ سربرگ car1.svg */\n  top: 93mm;\n  right: 13mm;\n  bottom: 44mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--first {\n  top: 93mm;\n  right: 13mm;\n  bottom: 11mm;\n  left: 13mm;\n}",
+    "new_string": "/* car1: خط جداکنندهٔ سربرگ ≈ y168 در viewBox — پایین صفحه بدون پاورقی */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 72mm;\n  right: 13mm;\n  bottom: 12mm;\n  left: 13mm;\n}"
+  },
+  {
+    "line": 899,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* car1: خط جداکنندهٔ سربرگ ≈ y168 در viewBox — پایین صفحه بدون پاورقی */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 72mm;\n  right: 13mm;\n  bottom: 12mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--middle {\n  top: 14mm;\n  right: 14mm;\n  bottom: 14mm;\n  left: 14mm;\n}\n\n.worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 48mm;\n  left: 14mm;\n}",
+    "new_string": "/* car1: چند میلی‌متر زیر ابر تا خط‌چین پایین */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 68mm;\n  right: 13mm;\n  bottom: 9mm;\n  left: 13mm;\n}\n\n/* car2: خط‌چین بالا تا بالای شکل‌های پایین */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 48mm;\n  left: 14mm;\n}"
+  },
+  {
+    "line": 906,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* car2: خط‌چین بالا تا بالای شکل‌های پایین */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 48mm;\n  left: 14mm;\n}",
+    "new_string": "/* car2: خط‌چین بالا تا خط آبی (بالای ردیف شکل‌های بزرگ پایین) */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 27mm;\n  left: 14mm;\n}"
+  },
+  {
+    "line": 915,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* car1: چند میلی‌متر زیر ابر تا خط‌چین پایین */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 68mm;\n  right: 13mm;\n  bottom: 9mm;\n  left: 13mm;\n}\n\n/* car2: خط‌چین بالا تا خط آبی (بالای ردیف شکل‌های بزرگ پایین) */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14mm;\n  right: 14mm;\n  bottom: 27mm;\n  left: 14mm;\n}",
+    "new_string": "/* car1 — مقادیر از cartoon-layout.ts (تا خط‌چین پایین، نه پایین‌تر) */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 62.9mm;\n  right: 13mm;\n  bottom: 17.8mm;\n  left: 13mm;\n}\n\n/* car2 — از cartoon-layout.ts */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14.1mm;\n  right: 14mm;\n  bottom: 27mm;\n  left: 14mm;\n}"
+  },
+  {
+    "line": 916,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  bottom: 17.8mm;",
+    "new_string": "  bottom: 20.7mm;"
+  },
+  {
+    "line": 917,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* car1 — مقادیر از cartoon-layout.ts (تا خط‌چین پایین، نه پایین‌تر) */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 62.9mm;\n  right: 13mm;\n  bottom: 20.7mm;\n  left: 13mm;\n}",
+    "new_string": "/* car1 — هم‌تراز cartoon-layout.ts (y175 … y770 در viewBox car1) */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 62.9mm;\n  right: 13mm;\n  bottom: 20.7mm;\n  left: 13mm;\n}"
+  },
+  {
+    "line": 923,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "/* car1 — هم‌تراز cartoon-layout.ts (y175 … y770 در viewBox car1) */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  top: 62.9mm;\n  right: 13mm;\n  bottom: 20.7mm;\n  left: 13mm;\n}\n\n/* car2 — از cartoon-layout.ts */\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: 14.1mm;\n  right: 14mm;\n  bottom: 27mm;\n  left: 14mm;\n}",
+    "new_string": "/* inset از cartoon-layout.ts — روی .worksheet-cartoon-page با CSS var تنظیم می‌شود */\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first,\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  top: var(--cartoon-content-top);\n  bottom: var(--cartoon-content-bottom);\n}\n\n.worksheet-cartoon-content--single,\n.worksheet-cartoon-content--first {\n  right: 13mm;\n  left: 13mm;\n}\n\n.worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  right: 14mm;\n  left: 14mm;\n}"
+  },
+  {
+    "line": 943,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  text-align: center;\n  font-size: 13pt;\n  font-weight: 800;\n  line-height: 1.45;",
+    "new_string": "  text-align: center;\n  font-family: var(--font-vazirmatn), Tahoma, sans-serif;\n  font-weight: 800;\n  line-height: 1.45;"
+  },
+  {
+    "line": 961,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-title {\n  position: absolute;\n  top: 27mm;\n  left: 50%;\n  z-index: 2;\n  width: 120mm;\n  max-width: 78%;\n  transform: translateX(-50%);\n  text-align: center;\n  font-family: var(--font-vazirmatn), Tahoma, sans-serif;\n  font-weight: 800;\n  line-height: 1.45;\n  color: #0369a1;\n}",
+    "new_string": ".worksheet-cartoon-title {\n  position: absolute;\n  top: var(--cartoon-title-top, 36.3mm);\n  left: 50%;\n  z-index: 2;\n  display: flex;\n  height: var(--cartoon-title-height, 7.1mm);\n  width: 72%;\n  max-width: 158mm;\n  align-items: center;\n  justify-content: center;\n  transform: translateX(-50%);\n  text-align: center;\n  font-family: var(--font-vazirmatn), Tahoma, sans-serif;\n  font-weight: 900;\n  line-height: 1.2;\n  color: #0369a1;\n}"
+  },
+  {
+    "line": 967,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 36.3mm);",
+    "new_string": "  top: var(--cartoon-title-top, 38mm);"
+  },
+  {
+    "line": 967,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  height: var(--cartoon-title-height, 7.1mm);",
+    "new_string": "  height: var(--cartoon-title-height, 7.2mm);"
+  },
+  {
+    "line": 993,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-content {\n  position: absolute;\n  z-index: 2;\n  overflow: hidden;\n}",
+    "new_string": ".worksheet-cartoon-content {\n  position: absolute;\n  z-index: 2;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}"
+  },
+  {
+    "line": 997,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 38mm);",
+    "new_string": "  top: var(--cartoon-title-top, 39.1mm);"
+  },
+  {
+    "line": 997,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  height: var(--cartoon-title-height, 7.2mm);",
+    "new_string": "  height: var(--cartoon-title-height, 7.1mm);"
+  },
+  {
+    "line": 999,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 36.3mm);",
+    "new_string": "  top: var(--cartoon-title-top, 39.1mm);"
+  },
+  {
+    "line": 1008,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 39.1mm);",
+    "new_string": "  top: var(--cartoon-title-top, 41.3mm);"
+  },
+  {
+    "line": 1010,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 36.3mm);",
+    "new_string": "  top: var(--cartoon-title-top, 41.3mm);"
+  },
+  {
+    "line": 1017,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  top: var(--cartoon-title-top, 41.3mm);",
+    "new_string": "  top: var(--cartoon-title-top, 43.8mm);"
+  },
+  {
+    "line": 1017,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  right: 14mm;\n  left: 14mm;\n}\n\n@media print {",
+    "new_string": ".worksheet-cartoon-content--middle,\n.worksheet-cartoon-content--last {\n  right: 14mm;\n  left: 14mm;\n}\n\n.worksheet-cartoon-questions {\n  height: 100%;\n  min-height: 0;\n}\n\n@media print {"
+  },
+  {
+    "line": 1017,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": "  .worksheet-cartoon-page--middle {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n}",
+    "new_string": "  .worksheet-cartoon-page--middle {\n    -webkit-print-color-adjust: exact !important;\n    print-color-adjust: exact !important;\n  }\n\n  .worksheet-cartoon-content {\n    display: flex !important;\n    flex-direction: column !important;\n  }\n\n  .worksheet-cartoon-questions {\n    flex: 1 1 auto !important;\n    height: 100% !important;\n    min-height: 0 !important;\n  }\n}"
+  },
+  {
+    "line": 1126,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".manual-studio .tiptap,\n.manual-studio .ProseMirror,\n.manual-studio .ProseMirror:focus {\n  outline: none !important;\n  box-shadow: none !important;\n}",
+    "new_string": ".manual-studio .tiptap,\n.manual-studio .ProseMirror,\n.manual-studio .ProseMirror:focus {\n  outline: none !important;\n  box-shadow: none !important;\n}\n\n.manual-studio [data-block-shell] .ProseMirror {\n  width: 100% !important;\n  max-width: none !important;\n  box-sizing: border-box;\n}\n\n.manual-studio [data-block-shell] .ProseMirror p {\n  width: 100%;\n  max-width: none;\n}"
+  },
+  {
+    "line": 1142,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".manual-studio [data-block-shell] .ProseMirror p {\n  width: 100%;\n  max-width: none;\n}",
+    "new_string": ".manual-studio [data-block-shell] .ProseMirror p {\n  width: 100%;\n  max-width: none;\n}\n\n/* کادر متن غیرفعال — فقط در ادیتور (no-print روی لایهٔ جدا) */\n@media screen {\n  .manual-studio [data-block-shell] .ProseMirror {\n    min-height: 1.5rem;\n  }\n}"
+  },
+  {
+    "line": 1153,
+    "name": "StrReplace",
+    "path": "d:\\dastyar-moallem\\app\\globals.css",
+    "old_string": ".tiptap {\n  outline: none;\n}",
+    "new_string": ".tiptap {\n  outline: none;\n}\n\n/** ارقام فارسی (Vazirmatn ss01) — canvas، پیش‌نمایش A4، چاپ */\n.persian-nums {\n  font-feature-settings: \"ss01\" 1;\n  -moz-font-feature-settings: \"ss01\" 1;\n}\n\n.persian-nums input,\n.persian-nums textarea,\n.persian-nums select,\n.persian-nums [contenteditable=\"true\"] {\n  font-feature-settings: \"ss01\" 1;\n  -moz-font-feature-settings: \"ss01\" 1;\n}"
+  }
+]
