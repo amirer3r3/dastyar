@@ -245,22 +245,35 @@ a,
   break-after: auto;
 }
 
+.worksheet-cartoon-theme-art {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  inset: var(--cartoon-page-outer-margin, 8mm);
+}
+
+.worksheet-cartoon-theme-art img {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 .worksheet-cartoon-content {
   position: absolute;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  right: 13mm;
-  left: 13mm;
+  right: var(--cartoon-content-side, 13mm);
+  left: var(--cartoon-content-side, 13mm);
   top: var(--cartoon-content-top, 52mm);
   bottom: var(--cartoon-content-bottom, 18mm);
+  box-sizing: border-box;
 }
 
 .worksheet-cartoon-title {
   position: absolute;
   z-index: 3;
-  right: 15mm;
-  left: 15mm;
+  right: var(--cartoon-content-side, 13mm);
+  left: var(--cartoon-content-side, 13mm);
   top: var(--cartoon-title-top, 16mm);
   height: var(--cartoon-title-height, 6mm);
   display: flex;

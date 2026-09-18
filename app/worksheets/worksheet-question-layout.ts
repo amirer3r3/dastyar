@@ -10,8 +10,10 @@ import {
 /** همان تبدیل mm→px در CSS چاپ / A4 */
 export const MM_TO_PX = 96 / 25.4;
 
-/** حاشیهٔ چپ/راست ناحیهٔ سوالات car1 (globals.css) */
-export const CARTOON_CONTENT_SIDE_MM = 13;
+import { CARTOON_CONTENT_SIDE_MM as CARTOON_SIDE_FROM_LAYOUT } from "./cartoon-layout";
+
+/** حاشیهٔ چپ/راست ناحیهٔ سوالات (هم‌تراز globals.css) */
+export const CARTOON_CONTENT_SIDE_MM = CARTOON_SIDE_FROM_LAYOUT;
 
 /** h-8 — ردیف شماره سوال */
 export const CARTOON_QUESTION_BADGE_PX = 32;

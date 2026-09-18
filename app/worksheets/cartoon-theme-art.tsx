@@ -11,12 +11,13 @@ function themeSrcForRole(role: CartoonPageRole): string {
 
 export default function CartoonThemeArt({ role }: { role: CartoonPageRole }) {
   return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
-      src={themeSrcForRole(role)}
-      alt=""
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
-    />
+    <div className="worksheet-cartoon-theme-art" aria-hidden>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={themeSrcForRole(role)}
+        alt=""
+        className="h-full w-full object-fill print:block"
+      />
+    </div>
   );
 }

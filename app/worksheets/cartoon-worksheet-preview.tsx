@@ -28,6 +28,8 @@ import {
   CARTOON_CAR1_TOP_MM,
   CARTOON_CAR2_BOTTOM_MM,
   CARTOON_CAR2_TOP_MM,
+  CARTOON_CONTENT_SIDE_MM,
+  CARTOON_PAGE_OUTER_MARGIN_MM,
 } from "./cartoon-layout";
 
 function AnswerSpace({
@@ -178,14 +180,20 @@ export default function CartoonWorksheetPreview({ data }: { data: WorksheetData 
         questionOffset += pageQuestions.length;
 
         const car1 = role === "single" || role === "first";
+        const cartoonFrameVars = {
+          ["--cartoon-page-outer-margin" as string]: `${CARTOON_PAGE_OUTER_MARGIN_MM}mm`,
+          ["--cartoon-content-side" as string]: `${CARTOON_CONTENT_SIDE_MM}mm`,
+        };
         const pageInsets = car1
           ? {
+              ...cartoonFrameVars,
               ["--cartoon-content-top" as string]: `${CARTOON_CAR1_TOP_MM}mm`,
               ["--cartoon-content-bottom" as string]: `${CARTOON_CAR1_BOTTOM_MM}mm`,
               ["--cartoon-title-top" as string]: `${CARTOON_CAR1_TITLE_TOP_MM}mm`,
               ["--cartoon-title-height" as string]: `${CARTOON_CAR1_TITLE_HEIGHT_MM}mm`,
             }
           : {
+              ...cartoonFrameVars,
               ["--cartoon-content-top" as string]: `${CARTOON_CAR2_TOP_MM}mm`,
               ["--cartoon-content-bottom" as string]: `${CARTOON_CAR2_BOTTOM_MM}mm`,
             };
