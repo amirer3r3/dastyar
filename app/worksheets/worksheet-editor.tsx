@@ -471,7 +471,10 @@ export default function WorksheetEditor() {
               <Sparkles size={18} className="text-accent" />
               <h2 className="text-sm font-bold text-foreground">تم کاربرگ</h2>
             </div>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div
+              className="flex flex-row flex-nowrap gap-2 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
               {worksheetThemeOptions.map((theme) => {
                 const isActive = data.theme === theme.id;
                 return (
@@ -479,7 +482,7 @@ export default function WorksheetEditor() {
                     key={theme.id}
                     type="button"
                     onClick={() => setTheme(theme.id)}
-                    className={`flex flex-col items-center gap-1 rounded-app border-2 p-2 text-sm transition-colors ${
+                    className={`flex w-[min(42vw,9.5rem)] shrink-0 flex-col items-center gap-1 rounded-app border-2 p-2 text-sm transition-colors ${
                       isActive ? theme.activeClass : "border-border text-muted"
                     }`}
                   >

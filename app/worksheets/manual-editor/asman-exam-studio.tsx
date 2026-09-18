@@ -21,8 +21,11 @@ import {
   FREE_SHEET_QUESTION_IDLE_CLASS,
   FREE_SHEET_QUESTION_SELECTED_CLASS,
 } from "./free-question-selection";
+import { blocksForSheetExamPagination } from "./sheet-exam-pagination-blocks";
 import { QUESTION_TEXT_BOX_CONSTRAINT_CLASS } from "../question-text-constraints";
-import StudioSheetQuestionInset from "./StudioSheetQuestionInset";
+import StudioSheetQuestionInset, {
+  STUDIO_SHEET_QUESTION_INSET_ASMAN_MM,
+} from "./StudioSheetQuestionInset";
 
 type Props = {
   pageIndex: number;
@@ -34,8 +37,7 @@ type Props = {
 };
 
 export function useAsmanExamPages(blocks: ManualBlock[], fontSize: string) {
-  const geometrySnap = useExamDesignerStore((s) => s.geometrySnap);
-  const layoutBlocks = geometrySnap?.blocks ?? blocks;
+  const layoutBlocks = blocksForSheetExamPagination(blocks);
 
   return useMemo(() => {
     const questions = blocksToWorksheetQuestions(layoutBlocks);
@@ -83,7 +85,10 @@ export default function AsmanExamStudioPage({
     <div
       className={`worksheet-asman-free-studio ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} min-h-0 flex-1 overflow-x-clip overflow-y-visible`}
     >
-      <StudioSheetQuestionInset>
+      <StudioSheetQuestionInset
+        insetMm={STUDIO_SHEET_QUESTION_INSET_ASMAN_MM}
+        className="studio-sheet-question-inset--asman"
+      >
       <StandardExamFreeQuestions
         rows={pageRows}
         startIndex={startIndex}

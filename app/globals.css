@@ -43,6 +43,12 @@ body {
   font-family: var(--font-vazirmatn), Tahoma, sans-serif;
 }
 
+/* طرح درس — primary هم‌خوان با هدر emerald/teal */
+.lesson-plan-section {
+  --color-primary: #059669;
+  --color-primary-foreground: #ffffff;
+}
+
 a,
 [role="button"] {
   touch-action: manipulation;
@@ -300,18 +306,28 @@ a,
   gap: 0.5rem;
 }
 
+.worksheet-theme-asman .worksheet-asman-questions {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding-left: var(--asman-question-inset-x, 8mm);
+  padding-right: var(--asman-question-inset-x, 8mm);
+  overflow-x: clip;
+}
+
 .worksheet-asman-title {
   position: absolute;
   z-index: 3;
-  right: var(--asman-content-side, 17mm);
-  left: var(--asman-content-side, 17mm);
+  right: var(--asman-content-side-right, var(--asman-content-side, 17mm));
+  left: var(--asman-content-side-left, var(--asman-content-side, 17mm));
   top: var(--asman-title-top, 36mm);
   height: var(--asman-title-height, 14mm);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   text-align: center;
+  transform: translateY(var(--asman-title-nudge-y, -17mm));
 }
 
 .worksheet-theme-asman .worksheet-asman-page img {
@@ -345,6 +361,11 @@ a,
 
 .worksheet-asman-free-studio .standard-exam-free-list {
   padding: 0;
+}
+
+.worksheet-asman-page--first .worksheet-asman-free-studio .standard-exam-free-list {
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .worksheet-asman-free-studio .standard-exam-free-item,
@@ -391,6 +412,17 @@ a,
 .manual-studio .manual-canvas-scale-viewport {
   overflow-x: clip;
   max-width: 100%;
+}
+
+.manual-studio .manual-canvas-viewport--pan {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.manual-studio .manual-canvas-viewport--pan #manual-print-area,
+.manual-studio .manual-canvas-viewport--pan #manual-print-area * {
+  pointer-events: none !important;
 }
 
 .worksheet-asman-free-studio .standard-exam-free-item .question-extra {
@@ -711,6 +743,45 @@ a,
   color: #0f172a;
 }
 
+/* قالب آزاد — سربرگ مینیمال */
+.standard-exam-header--minimal.minHeader.minHeader--free-form {
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+.minHeader--free-form .minHeader__right,
+.minHeader--free-form .minHeader__left {
+  padding-top: 3mm;
+}
+
+.minHeader--free-form .minHeader__stack {
+  padding-top: 0.5mm;
+}
+
+.minHeader--free-form .minHeader__center {
+  align-self: flex-start;
+  padding-top: 0;
+  margin-top: -2px;
+}
+
+.minHeader--free-form .bismillah {
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.minHeader--free-form .title {
+  margin-top: 3mm;
+  padding-top: 0.5mm;
+}
+
+.minHeader--free-form .line {
+  flex: 0 1 72px;
+  min-width: 60px;
+  width: 72px;
+  max-width: 72px;
+}
+
 @media print {
   .standard-exam-min-header-slot {
     margin-bottom: 24px;
@@ -727,6 +798,18 @@ a,
     border-radius: 6px;
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  .standard-exam-header--minimal.minHeader.minHeader--free-form {
+    padding-top: 8px;
+    align-items: flex-start;
+  }
+
+  .minHeader--free-form .line {
+    flex: 0 1 72px;
+    min-width: 60px;
+    width: 72px;
+    max-width: 72px;
   }
 
   .minHeader .line {
@@ -778,8 +861,31 @@ a,
   direction: rtl;
   display: flex;
   flex-direction: column;
-  padding: 12px 6mm;
+  padding: 12px 4mm;
   overflow-x: clip;
+}
+
+/* قالب آزاد — آزمون مدارس: حداکثر عرض داخل حاشیه */
+.school-exam-theme.standard-exam-layout--free-form .standard-exam-free-list {
+  padding-left: 1.5mm;
+  padding-right: 1.5mm;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.school-exam-theme.standard-exam-layout--free-form .standard-exam-free-item {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+.manual-studio.school-exam-theme
+  .standard-exam-layout--free-form
+  .standard-exam-free-list {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .standard-exam-free-item,
@@ -1064,8 +1170,22 @@ a,
 .standard-exam-answer-space {
   display: block;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin-top: 6px;
   flex-shrink: 0;
+  background: transparent;
+  background-image: none;
+}
+
+/* آزمون مدارس — فضای پاسخ بدون خط‌کشی */
+.school-exam-theme .standard-exam-answer-space,
+.worksheet-theme-standard .standard-exam-answer-space,
+.school-exam-theme .standard-exam-answer-space-wrap,
+.worksheet-theme-standard .standard-exam-answer-space-wrap {
+  background: transparent !important;
+  background-image: none !important;
+  border-bottom: none;
 }
 
 .standard-exam-answer-space-wrap {

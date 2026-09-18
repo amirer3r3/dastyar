@@ -70,7 +70,7 @@ export default function Canvas({ preview = false, scrollFooter }: Props) {
   }, [
     theme,
     blocks,
-    standardPagination.pages.length,
+    standardPagination,
     asmanPagination.pages.length,
   ]);
 
@@ -109,38 +109,123 @@ export default function Canvas({ preview = false, scrollFooter }: Props) {
 
   let questionNo = 0;
 
+  const panSessionRef = useRef<{
+    active: boolean;
+    startX: number;
+    startY: number;
+    scrollLeft: number;
+    scrollTop: number;
+    pointerId: number | null;
+    touchId: number | null;
+  }>({
+    active: false,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+    pointerId: null,
+    touchId: null,
+  });
+
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el || !panMode) return;
-    let startX = 0;
-    let startY = 0;
-    let sl = 0;
-    let st = 0;
-    const down = (e: PointerEvent) => {
-      if ((e.target as HTMLElement).closest("[data-block-shell]")) return;
-      startX = e.clientX;
-      startY = e.clientY;
-      sl = el.scrollLeft;
-      st = el.scrollTop;
+
+    const beginPan = (clientX: number, clientY: number) => {
+      panSessionRef.current = {
+        active: true,
+        startX: clientX,
+        startY: clientY,
+        scrollLeft: el.scrollLeft,
+        scrollTop: el.scrollTop,
+        pointerId: panSessionRef.current.pointerId,
+        touchId: panSessionRef.current.touchId,
+      };
+    };
+
+    /** Scroll is in viewport px; outer wrapper size already includes `scale`. */
+    const movePan = (clientX: number, clientY: number) => {
+      const s = panSessionRef.current;
+      if (!s.active) return;
+      el.scrollLeft = s.scrollLeft - (clientX - s.startX);
+      el.scrollTop = s.scrollTop - (clientY - s.startY);
+    };
+
+    const endPan = () => {
+      panSessionRef.current.active = false;
+      panSessionRef.current.pointerId = null;
+      panSessionRef.current.touchId = null;
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      if (panSessionRef.current.touchId != null) return;
+      panSessionRef.current.pointerId = e.pointerId;
+      beginPan(e.clientX, e.clientY);
       el.setPointerCapture(e.pointerId);
     };
-    const move = (e: PointerEvent) => {
+
+    const onPointerMove = (e: PointerEvent) => {
       if (!el.hasPointerCapture(e.pointerId)) return;
-      el.scrollLeft = sl - (e.clientX - startX);
-      el.scrollTop = st - (e.clientY - startY);
+      if (e.cancelable) e.preventDefault();
+      movePan(e.clientX, e.clientY);
     };
-    const up = (e: PointerEvent) => {
+
+    const onPointerUp = (e: PointerEvent) => {
       if (el.hasPointerCapture(e.pointerId)) {
         el.releasePointerCapture(e.pointerId);
       }
+      endPan();
     };
-    el.addEventListener("pointerdown", down);
-    el.addEventListener("pointermove", move);
-    el.addEventListener("pointerup", up);
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      if (panSessionRef.current.pointerId != null) return;
+      const t = e.touches[0];
+      panSessionRef.current.touchId = t.identifier;
+      beginPan(t.clientX, t.clientY);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const s = panSessionRef.current;
+      if (!s.active || s.touchId == null) return;
+      const t = Array.from(e.touches).find((x) => x.identifier === s.touchId);
+      if (!t) return;
+      e.preventDefault();
+      movePan(t.clientX, t.clientY);
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      const s = panSessionRef.current;
+      if (s.touchId == null) return;
+      const stillDown = Array.from(e.touches).some(
+        (x) => x.identifier === s.touchId
+      );
+      if (!stillDown) endPan();
+    };
+
+    const capture = { capture: true };
+    const captureNonPassive = { capture: true, passive: false as const };
+
+    el.addEventListener("pointerdown", onPointerDown, capture);
+    el.addEventListener("pointermove", onPointerMove, captureNonPassive);
+    el.addEventListener("pointerup", onPointerUp, capture);
+    el.addEventListener("pointercancel", onPointerUp, capture);
+    el.addEventListener("touchstart", onTouchStart, captureNonPassive);
+    el.addEventListener("touchmove", onTouchMove, captureNonPassive);
+    el.addEventListener("touchend", onTouchEnd, capture);
+    el.addEventListener("touchcancel", onTouchEnd, capture);
+
     return () => {
-      el.removeEventListener("pointerdown", down);
-      el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerup", up);
+      el.removeEventListener("pointerdown", onPointerDown, capture);
+      el.removeEventListener("pointermove", onPointerMove, captureNonPassive);
+      el.removeEventListener("pointerup", onPointerUp, capture);
+      el.removeEventListener("pointercancel", onPointerUp, capture);
+      el.removeEventListener("touchstart", onTouchStart, captureNonPassive);
+      el.removeEventListener("touchmove", onTouchMove, captureNonPassive);
+      el.removeEventListener("touchend", onTouchEnd, capture);
+      el.removeEventListener("touchcancel", onTouchEnd, capture);
+      endPan();
     };
   }, [panMode]);
 
@@ -156,11 +241,14 @@ export default function Canvas({ preview = false, scrollFooter }: Props) {
     >
       <div
         ref={scrollerRef}
-        className={`h-full overflow-auto overscroll-contain pb-28 ${
-          panMode ? "cursor-grab touch-pan-y active:cursor-grabbing" : ""
+        className={`manual-canvas-viewport h-full overflow-auto overscroll-contain pb-28 ${
+          panMode
+            ? "manual-canvas-viewport--pan cursor-grab active:cursor-grabbing"
+            : ""
         }`}
-        style={{ touchAction: panMode ? "pan-x pan-y" : "pan-y" }}
+        style={{ touchAction: panMode ? "none" : "pan-y" }}
         onClick={(e) => {
+          if (panMode) return;
           const t = e.target as HTMLElement;
           if (
             t.closest(

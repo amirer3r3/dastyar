@@ -292,7 +292,7 @@ export const useExamDesignerStore = create<ExamDesignerState>((set, get) => ({
   examCity: "",
   examDuration: "",
   footerMessage: "موفق و سربلند باشید",
-  worksheetTheme: "formal",
+  worksheetTheme: "standard",
   headerVariant: "standard",
   titleFontSize: "18px",
   questionStyle: defaultQuestionStyle(),
@@ -395,7 +395,7 @@ export const useExamDesignerStore = create<ExamDesignerState>((set, get) => ({
     const questionStyle = meta.questionStyle ?? defaultQuestionStyle();
     const migrated = migrateBlocks(cloneBlocks(layout.blocks));
     setStudioPageLayout({
-      theme: meta.theme ?? "formal",
+      theme: meta.theme ?? "standard",
       pageCount: computePageCount(migrated),
       headerVariant: headerForLayout,
     });
@@ -413,7 +413,7 @@ export const useExamDesignerStore = create<ExamDesignerState>((set, get) => ({
       examCity: meta.examCity ?? "",
       examDuration: meta.examDuration ?? "",
       footerMessage: meta.footerMessage ?? "موفق و سربلند باشید",
-      worksheetTheme: meta.theme ?? "formal",
+      worksheetTheme: meta.theme ?? "standard",
       headerVariant: headerForLayout,
       titleFontSize: meta.titleFontSize ?? "18px",
       questionStyle,

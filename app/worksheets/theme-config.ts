@@ -11,11 +11,11 @@ export type WorksheetThemeOption = {
 
 export const worksheetThemeOptions: WorksheetThemeOption[] = [
   {
-    id: "formal",
-    label: "رسمی",
-    hint: "مقاطع بالا",
-    emoji: "📄",
-    activeClass: "border-primary bg-primary/5 font-bold text-primary",
+    id: "standard",
+    label: "آزمون مدارس",
+    hint: "فرم استاندارد",
+    emoji: "🏫",
+    activeClass: "border-slate-700 bg-slate-50 font-bold text-slate-800",
   },
   {
     id: "cartoon",
@@ -37,12 +37,5 @@ export const worksheetThemeOptions: WorksheetThemeOption[] = [
     hint: "تم گرافیکی",
     previewSrc: "/themes/asman1.svg",
     activeClass: "border-sky-500 bg-sky-50 font-bold text-sky-700",
-  },
-  {
-    id: "standard",
-    label: "آزمون مدارس",
-    hint: "فرم استاندارد",
-    emoji: "🏫",
-    activeClass: "border-slate-700 bg-slate-50 font-bold text-slate-800",
   },
 ];

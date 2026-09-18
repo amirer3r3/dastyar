@@ -63,7 +63,7 @@ export default function ManualDesignEditor({
   activeDraftId,
   onClose,
   onDraftSaved,
-  theme = "formal",
+  theme = "standard",
   titleFontSize = "18px",
   questionStyle,
   onQuestionStyleChange,

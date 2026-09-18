@@ -83,18 +83,29 @@ function MinHeaderFieldRow({
   );
 }
 
-export function MinimalExamHeader({ data }: { data: StandardExamHeaderData }) {
+export function MinimalExamHeader({
+  data,
+  variant = "minimal",
+}: {
+  data: StandardExamHeaderData;
+  variant?: ExamHeaderVariant;
+}) {
   const bismillah = data.bismillah?.trim() || "به نام خدا";
   const examTitle = formatMinimalExamTitle(data.title);
+  const freeForm = variant === "minimal-free";
 
   return (
     <header
-      className="standard-exam-header standard-exam-header--minimal minHeader exam-header z-10 select-none"
+      className={`standard-exam-header standard-exam-header--minimal minHeader exam-header z-10 select-none ${
+        freeForm ? "minHeader--free-form" : ""
+      }`.trim()}
       dir="rtl"
     >
       <div className="minHeader__right minHeader__stack">
         <MinHeaderFieldRow label="نام و نام خانوادگی:" />
-        <MinHeaderFieldRow label="کلاس / شعبه:" />
+        <MinHeaderFieldRow
+          label={freeForm ? "کلاس:" : "کلاس / شعبه:"}
+        />
       </div>
 
       <div className="minHeader__center">
@@ -154,7 +165,7 @@ export function StandardExamHeaderByVariant({
   data: StandardExamHeaderData;
 }) {
   if (usesMinimalExamHeader(variant)) {
-    return <MinimalExamHeader data={data} />;
+    return <MinimalExamHeader data={data} variant={variant} />;
   }
   return <StandardExamHeader data={data} />;
 }
@@ -492,7 +503,9 @@ export function StandardExamPageShell({
 }) {
   return (
     <section
-      className="standard-exam-page a4-page a4-sheet worksheet-theme-standard school-exam-theme bg-white shadow-xl"
+      className={`standard-exam-page a4-page a4-sheet worksheet-theme-standard school-exam-theme bg-white shadow-xl ${
+        headerVariant === "minimal-free" ? "standard-exam-layout--free-form" : ""
+      }`.trim()}
       style={A4_SHEET_SURFACE_STYLE}
       dir="rtl"
     >

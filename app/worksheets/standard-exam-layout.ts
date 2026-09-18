@@ -9,6 +9,7 @@ import {
   EDITOR_ANSWER_SPACE_UNIT_PX,
 } from "./question-style";
 import {
+  ANSWER_SPACE_MARGIN_TOP_PX,
   MM_TO_PX,
   normalizeAnswerUnits,
   parseFontSizePx,
@@ -42,10 +43,16 @@ export const STANDARD_COL_SCORE_PX = 58;
 export const STANDARD_ANSWER_HANDLE_PX = 14;
 /** حاشیهٔ امن برای جلوگیری از بریدگی با `overflow:hidden` صفحه */
 export const STANDARD_PAGINATION_SAFETY_PX = 20;
-/** فاصلهٔ عمودی بین سوالات در قالب «مینیمال آزاد» (معادل space-y-6) */
+/** فاصلهٔ عمودی بین سوالات در قالب «مینیمال آزاد» (deprecated — از TAIL استفاده می‌شود) */
 export const STANDARD_FREE_QUESTION_GAP_PX = 20;
-/** پدینگ `.standard-exam-free-list` — افقی / عمودی */
-export const STANDARD_FREE_LIST_PAD_X_PX = 16;
+/** padding-bottom + margin-bottom + border — `.standard-exam-free-item` */
+export const STANDARD_FREE_ITEM_TAIL_PX = 41;
+/** فاصلهٔ زیر اسلات سربرگ مینیمال آزاد */
+export const STANDARD_MIN_FREE_HEADER_BODY_GAP_PX = 24;
+/** پدینگ `.standard-exam-free-list` — افقی (فقط قالب آزاد، ~1.5mm) */
+export const STANDARD_FREE_LIST_PAD_X_MM = 1.5;
+export const STANDARD_FREE_LIST_PAD_X_PX =
+  STANDARD_FREE_LIST_PAD_X_MM * MM_TO_PX;
 export const STANDARD_FREE_LIST_PAD_Y_PX = 12;
 /** شماره + gap-2 (۸px) */
 export const STANDARD_FREE_NUMBER_COL_PX = 28;
@@ -84,10 +91,14 @@ function estimateTextLines(text: string, fontSizePx: number, widthPx: number): n
   return Math.ceil(len / charsPerLine);
 }
 
-function estimateHtmlParagraphLines(html: string | undefined): number {
-  if (!html?.trim()) return 0;
-  const blocks = html.match(/<p[\s>]/gi);
-  return blocks && blocks.length > 1 ? blocks.length - 1 : 0;
+function htmlToPlainForEstimate(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\n+/g, "\n")
+    .trim();
 }
 
 export type StandardRowEstimateOptions = {
@@ -95,6 +106,8 @@ export type StandardRowEstimateOptions = {
   html?: string;
   /** دستگیرهٔ فضای پاسخ در طراحی حرفه‌ای */
   includeAnswerHandle?: boolean;
+  /** گزینه‌های چندگزینه‌ای / extra زیر متن */
+  extraRowHeightPx?: number;
 };
 
 export function estimateStandardRowHeightPx(
@@ -105,10 +118,12 @@ export function estimateStandardRowHeightPx(
   const fs = parseFontSizePx(fontSize);
   const lineH = Math.max(22, Math.round(fs * 1.55));
   const colW = standardQuestionColWidthPx();
-  const wrapped = estimateTextLines(q.text, fs, colW);
-  const extraParagraphs = estimateHtmlParagraphLines(options?.html);
-  const lines = wrapped + extraParagraphs;
-  const textH = lines * lineH;
+  const plain =
+    options?.html?.trim() && options.html.trim().length > 0
+      ? htmlToPlainForEstimate(options.html)
+      : q.text;
+  const wrapped = estimateTextLines(plain || q.text || "...", fs, colW);
+  const textH = wrapped * lineH;
   const units = normalizeAnswerUnits(q.answerLines);
   const answerMargin = units > 0 ? 8 : 0;
   const unitPx = options?.includeAnswerHandle
@@ -131,19 +146,38 @@ export function estimateStandardFreeQuestionHeightPx(
   const fs = parseFontSizePx(fontSize);
   const lineH = Math.max(22, Math.round(fs * 1.55));
   const colW = standardFreeQuestionColWidthPx();
-  const wrapped = estimateTextLines(q.text, fs, colW);
-  const extraParagraphs = estimateHtmlParagraphLines(options?.html);
-  const lines = wrapped + extraParagraphs;
-  const textH = lines * lineH;
+  const plain =
+    options?.html?.trim() && options.html.trim().length > 0
+      ? htmlToPlainForEstimate(options.html)
+      : q.text;
+  const wrapped = estimateTextLines(plain || q.text || "...", fs, colW);
+  const textH = wrapped * lineH;
   const units = normalizeAnswerUnits(q.answerLines);
-  const answerMargin = units > 0 ? 8 : 0;
+  const answerMargin = units > 0 ? ANSWER_SPACE_MARGIN_TOP_PX : 0;
   const unitPx = options?.includeAnswerHandle
     ? EDITOR_ANSWER_SPACE_UNIT_PX
     : ANSWER_SPACE_UNIT_PX;
   const answerH = units > 0 ? answerMargin + units * unitPx : 0;
   const handleH =
     options?.includeAnswerHandle && units > 0 ? STANDARD_ANSWER_HANDLE_PX : 0;
-  return Math.max(STANDARD_ROW_MIN_PX, textH + answerH + handleH);
+  const extra = options?.extraRowHeightPx ?? 0;
+  return Math.max(
+    STANDARD_ROW_MIN_PX,
+    textH + answerH + handleH + extra + STANDARD_FREE_ITEM_TAIL_PX
+  );
+}
+
+/** تخمین ارتفاع یک سوال — ورود واحد برای همهٔ قالب‌های آزمون مدارس */
+export function estimateStandardQuestionRowHeightPx(
+  q: WorksheetQuestion,
+  fontSize: string,
+  headerVariant: ExamHeaderVariant,
+  options?: StandardRowEstimateOptions
+): number {
+  if (headerVariant === "minimal-free") {
+    return estimateStandardFreeQuestionHeightPx(q, fontSize, options);
+  }
+  return estimateStandardRowHeightPx(q, fontSize, options);
 }
 
 export function standardPageCapacityPx(
@@ -162,6 +196,10 @@ export function standardPageCapacityPx(
     : 0;
   const freeListPadY =
     headerVariant === "minimal-free" ? STANDARD_FREE_LIST_PAD_Y_PX * 2 : 0;
+  const minFreeHeaderGap =
+    pageIndex === 0 && headerVariant === "minimal-free"
+      ? STANDARD_MIN_FREE_HEADER_BODY_GAP_PX
+      : 0;
   const footer = isLastPage ? STANDARD_FOOTER_PX : 0;
   return (
     STANDARD_A4_HEIGHT_PX -
@@ -169,6 +207,7 @@ export function standardPageCapacityPx(
     header -
     thead -
     freeListPadY -
+    minFreeHeaderGap -
     footer -
     STANDARD_PAGINATION_SAFETY_PX
   );
@@ -191,24 +230,26 @@ export function standardPageUsedHeightPx(
   fontSize: string,
   options?: StandardRowEstimateOptions & {
     htmlByQuestionId?: Map<string, string>;
+    extraRowHeightByQuestionId?: Map<string, number>;
     headerVariant?: ExamHeaderVariant;
   }
 ): number {
   if (rows.length === 0) return 0;
-  const free = options?.headerVariant === "minimal-free";
-  return rows.reduce((sum, q, index) => {
+  const headerVariant = options?.headerVariant ?? "standard";
+  return rows.reduce((sum, q) => {
     const html = options?.htmlByQuestionId?.get(q.id);
-    const rowH = free
-      ? estimateStandardFreeQuestionHeightPx(q, fontSize, {
-          html,
-          includeAnswerHandle: options?.includeAnswerHandle,
-        })
-      : estimateStandardRowHeightPx(q, fontSize, {
-          html,
-          includeAnswerHandle: options?.includeAnswerHandle,
-        });
-    const gap =
-      free && index > 0 ? STANDARD_FREE_QUESTION_GAP_PX : 0;
-    return sum + rowH + gap;
+    const extraRowHeightPx =
+      options?.extraRowHeightByQuestionId?.get(q.id) ?? 0;
+    const rowH = estimateStandardQuestionRowHeightPx(
+      q,
+      fontSize,
+      headerVariant,
+      {
+        html,
+        includeAnswerHandle: options?.includeAnswerHandle,
+        extraRowHeightPx,
+      }
+    );
+    return sum + rowH;
   }, 0);
 }

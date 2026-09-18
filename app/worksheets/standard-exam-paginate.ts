@@ -14,19 +14,9 @@ export type StandardExamPagination = {
 
 export type PaginateStandardExamOptions = StandardRowEstimateOptions & {
   htmlByQuestionId?: Map<string, string>;
+  extraRowHeightByQuestionId?: Map<string, number>;
   headerVariant?: ExamHeaderVariant;
 };
-
-function measureOptions(
-  options?: PaginateStandardExamOptions
-): PaginateStandardExamOptions | undefined {
-  if (!options) return undefined;
-  return {
-    includeAnswerHandle: options.includeAnswerHandle,
-    htmlByQuestionId: options.htmlByQuestionId,
-    headerVariant: options.headerVariant,
-  };
-}
 
 function fillStandardPage(
   questions: WorksheetQuestion[],
@@ -38,18 +28,19 @@ function fillStandardPage(
   const remaining = questions.length - startIdx;
   if (remaining <= 0) return { page: [], nextIdx: startIdx };
 
-  const measure = measureOptions(options);
+  const headerVariant = options?.headerVariant ?? "standard";
 
   let best = 0;
   for (let count = remaining; count >= 1; count--) {
     const trial = questions.slice(startIdx, startIdx + count);
     const isLast = startIdx + count >= questions.length;
-    const cap = standardPageCapacityPx(
-      pageIndex,
-      isLast,
-      options?.headerVariant ?? "standard"
-    );
-    const used = standardPageUsedHeightPx(trial, fontSize, measure);
+    const cap = standardPageCapacityPx(pageIndex, isLast, headerVariant);
+    const used = standardPageUsedHeightPx(trial, fontSize, {
+      includeAnswerHandle: options?.includeAnswerHandle,
+      htmlByQuestionId: options?.htmlByQuestionId,
+      extraRowHeightByQuestionId: options?.extraRowHeightByQuestionId,
+      headerVariant,
+    });
     if (used <= cap) {
       best = count;
       break;

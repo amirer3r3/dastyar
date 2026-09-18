@@ -8,17 +8,19 @@ import {
   type StandardExamHeaderData,
 } from "../standard-exam-template";
 import { paginateStandardExamQuestions } from "../standard-exam-paginate";
+import { buildStandardExamPaginationMaps } from "../standard-exam-pagination-context";
 import { defaultQuestionStyle } from "../question-style";
 import type { WorksheetQuestion } from "../types";
-import {
-  blocksToWorksheetQuestions,
-  type ManualBlock,
-} from "./types";
+import { blocksToWorksheetQuestions, type ManualBlock } from "./types";
+import { blocksForSheetExamPagination } from "./sheet-exam-pagination-blocks";
 import { useShallow } from "zustand/react/shallow";
 import { useExamDesignerStore } from "./store/exam-designer-store";
 import RichTextField from "./rich-text-field";
 import { QUESTION_TEXT_BOX_CONSTRAINT_CLASS } from "../question-text-constraints";
-import StudioSheetQuestionInset from "./StudioSheetQuestionInset";
+import StudioSheetQuestionInset, {
+  STUDIO_SHEET_QUESTION_INSET_SCHOOL_FREE_MM,
+  STUDIO_SHEET_QUESTION_INSET_STANDARD_MM,
+} from "./StudioSheetQuestionInset";
 import QuestionAnswerSpaceHandle from "./QuestionAnswerSpaceHandle";
 import {
   FREE_SHEET_QUESTION_IDLE_CLASS,
@@ -162,28 +164,19 @@ export function buildStandardExamHeaderFromStore(state: {
 }
 
 export function useStandardExamPages(blocks: ManualBlock[], fontSize: string) {
-  const geometrySnap = useExamDesignerStore((s) => s.geometrySnap);
   const headerVariant = useExamDesignerStore((s) => s.headerVariant);
-  const layoutBlocks = geometrySnap?.blocks ?? blocks;
-
   return useMemo(() => {
+    const layoutBlocks = blocksForSheetExamPagination(blocks);
     const questions = blocksToWorksheetQuestions(layoutBlocks);
-    const htmlByQuestionId = new Map<string, string>();
-    for (const b of layoutBlocks) {
-      if (
-        b.type === "question" ||
-        b.type === "bank-question" ||
-        b.type === "checkbox-question"
-      ) {
-        htmlByQuestionId.set(b.id, b.html);
-      }
-    }
+    const { htmlByQuestionId, extraRowHeightByQuestionId } =
+      buildStandardExamPaginationMaps(layoutBlocks);
     return paginateStandardExamQuestions(questions, fontSize, {
       includeAnswerHandle: true,
       htmlByQuestionId,
+      extraRowHeightByQuestionId,
       headerVariant,
     });
-  }, [layoutBlocks, fontSize, headerVariant]);
+  }, [blocks, fontSize, headerVariant]);
 }
 
 export default function StandardExamStudioPage({
@@ -217,7 +210,16 @@ export default function StandardExamStudioPage({
 
   return (
     <>
-      <StudioSheetQuestionInset>
+      <StudioSheetQuestionInset
+        insetMm={
+          isFreeLayout
+            ? STUDIO_SHEET_QUESTION_INSET_SCHOOL_FREE_MM
+            : STUDIO_SHEET_QUESTION_INSET_STANDARD_MM
+        }
+        className={
+          isFreeLayout ? "studio-sheet-question-inset--school-free-form" : ""
+        }
+      >
       <StandardExamQuestions
         layoutVariant={headerVariant}
         rows={pageRows}
@@ -228,7 +230,7 @@ export default function StandardExamStudioPage({
             <StandardExamAnswerSpace
               units={units}
               reserveEditorMin={!preview}
-              ruled={isFreeLayout}
+              rulingStyle="none"
             />
             <QuestionAnswerSpaceHandle questionId={q.id} preview={preview} />
           </div>

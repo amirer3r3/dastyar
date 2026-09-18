@@ -25,6 +25,8 @@ import {
   ASMAN_PAGE1_TOP_MM,
   ASMAN_PAGE2_BOTTOM_MM,
   ASMAN_PAGE2_TOP_MM,
+  ASMAN_QUESTION_INSET_HORIZONTAL_MM,
+  ASMAN_TITLE_NUDGE_Y_MM,
 } from "../asman-layout";
 
 type Props = {
@@ -109,12 +111,14 @@ export default function StudioSheetPage({
       ["--asman-content-side" as string]: `${ASMAN_CONTENT_SIDE_MM}mm`,
       ["--asman-content-side-left" as string]: `${ASMAN_CONTENT_SIDE_LEFT_MM}mm`,
       ["--asman-content-side-right" as string]: `${ASMAN_CONTENT_SIDE_RIGHT_MM}mm`,
+      ["--asman-question-inset-x" as string]: `${ASMAN_QUESTION_INSET_HORIZONTAL_MM}mm`,
       ...(pageOne
         ? {
             ["--asman-content-top" as string]: `${ASMAN_PAGE1_TOP_MM}mm`,
             ["--asman-content-bottom" as string]: `${ASMAN_PAGE1_BOTTOM_MM}mm`,
             ["--asman-title-top" as string]: `${ASMAN_PAGE1_TITLE_TOP_MM}mm`,
             ["--asman-title-height" as string]: `${ASMAN_PAGE1_TITLE_HEIGHT_MM}mm`,
+            ["--asman-title-nudge-y" as string]: `${ASMAN_TITLE_NUDGE_Y_MM}mm`,
           }
         : {
             ["--asman-content-top" as string]: `${ASMAN_PAGE2_TOP_MM}mm`,

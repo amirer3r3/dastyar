@@ -86,7 +86,7 @@ export const defaultWorksheet = (): WorksheetData => ({
   examDuration: "",
   footerMessage: "موفق و سربلند باشید",
   instructions: "به سوالات زیر با دقت پاسخ دهید.",
-  theme: "formal",
+  theme: "standard",
   headerVariant: "standard",
   questionStyle: defaultQuestionStyle(),
   answerRulingStyle: "none",
