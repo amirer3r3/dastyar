@@ -40,7 +40,7 @@ export const ASMAN_PAGE2_BOTTOM_MM =
 
 /** فاصلهٔ افقی از لبهٔ طرح — راست (شروع متن در RTL، فاصله از ابر/حاشیه) */
 export const ASMAN_CONTENT_SIDE_RIGHT_MM = 14;
-/** فاصلهٔ افقی از لبهٔ طرح — چپ (نزدیک خط حاشیه آبی، بدون تداخل) */
+/** فاصلهٔ ناحیهٔ محتوا از لبهٔ برگه — چپ (قبل از inset ۶mm سوالات) */
 export const ASMAN_CONTENT_SIDE_LEFT_MM = 5;
 /** @deprecated از LEFT/RIGHT استفاده کنید؛ برای عنوان متقارن */
 export const ASMAN_CONTENT_SIDE_MM = ASMAN_CONTENT_SIDE_RIGHT_MM;

@@ -17,6 +17,8 @@ import {
 import { useShallow } from "zustand/react/shallow";
 import { useExamDesignerStore } from "./store/exam-designer-store";
 import RichTextField from "./rich-text-field";
+import { QUESTION_TEXT_BOX_CONSTRAINT_CLASS } from "../question-text-constraints";
+import StudioSheetQuestionInset from "./StudioSheetQuestionInset";
 import QuestionAnswerSpaceHandle from "./QuestionAnswerSpaceHandle";
 import {
   FREE_SHEET_QUESTION_IDLE_CLASS,
@@ -102,8 +104,8 @@ export function StudioQuestionBody({
   };
 
   const shellClass = freeLayout
-    ? "standard-exam-q-text-rich block w-full min-w-0"
-    : `standard-exam-q-text min-w-0 w-full ${selected ? "ring-1 ring-[#0E7048]/40 ring-offset-1" : ""}`;
+    ? `standard-exam-q-text-rich block ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS}`
+    : `standard-exam-q-text ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} ${selected ? "ring-1 ring-[#0E7048]/40 ring-offset-1" : ""}`;
 
   return (
     <div
@@ -215,6 +217,7 @@ export default function StandardExamStudioPage({
 
   return (
     <>
+      <StudioSheetQuestionInset>
       <StandardExamQuestions
         layoutVariant={headerVariant}
         rows={pageRows}
@@ -289,6 +292,7 @@ export default function StandardExamStudioPage({
             : undefined
         }
       />
+      </StudioSheetQuestionInset>
       {isLastPage ? <StandardExamFooter message={footerMessage} /> : null}
     </>
   );

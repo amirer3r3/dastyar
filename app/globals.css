@@ -326,9 +326,13 @@ a,
   left: var(--asman-content-side-left, var(--asman-content-side, 17mm));
   top: var(--asman-content-top, 68mm);
   bottom: var(--asman-content-bottom, 18mm);
+  width: auto;
+  max-width: none;
   background: transparent;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   pointer-events: auto;
+  box-sizing: border-box;
 }
 
 .worksheet-asman-studio-body .standard-exam-free-list,
@@ -371,19 +375,22 @@ a,
   outline: none;
 }
 
-/* استودیو — ring انتخاب سوال بریده نشود */
+/* استودیو — clip افقی؛ ring با ring-inset داخل باکس می‌ماند */
 .manual-studio .worksheet-asman-page--studio {
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .manual-studio .worksheet-asman-studio-body,
 .manual-studio .worksheet-asman-free-studio,
 .manual-studio .worksheet-asman-free-studio .standard-exam-free-list {
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .manual-studio .manual-canvas-scale-viewport {
-  overflow: visible;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .worksheet-asman-free-studio .standard-exam-free-item .question-extra {
@@ -408,6 +415,63 @@ a,
 .manual-studio .ProseMirror:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.manual-studio .standard-exam-free-list,
+.manual-studio .standard-exam-free-item,
+.manual-studio .standard-exam-q-cell,
+.manual-studio .worksheet-asman-free-studio,
+.manual-studio .worksheet-asman-studio-body {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.manual-studio .standard-exam-body,
+.manual-studio .exam-body-container,
+.manual-studio .standard-exam-flow,
+.manual-studio .worksheet-asman-studio-body,
+.manual-studio .studio-sheet-question-inset,
+.manual-studio .studio-sheet-question-stack {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.manual-studio .standard-exam-free-list {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.manual-studio .standard-exam-page.a4-sheet,
+.manual-studio .studio-sheet.a4-sheet.worksheet-asman-page {
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+.manual-studio .exam-inner-frame,
+.manual-studio .exam-outer-frame {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.manual-studio .standard-exam-free-item .ProseMirror,
+.manual-studio .standard-exam-q-text-rich .ProseMirror,
+.manual-studio .manual-studio-rich-input .ProseMirror {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+/* iOS Safari: فونت زیر ۱۶px روی فوکوس باعث zoom می‌شود */
+@media (hover: none) and (pointer: coarse) {
+  .manual-studio .ProseMirror[contenteditable="true"] {
+    font-size: 16px !important;
+  }
 }
 
 .studio-bismillah-mark {
@@ -683,8 +747,11 @@ a,
   flex: 1 1 0;
   flex-direction: column;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 0;
   align-self: stretch;
+  box-sizing: border-box;
   overflow: visible;
 }
 
@@ -706,10 +773,13 @@ a,
 .standard-exam-free-list {
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   direction: rtl;
   display: flex;
   flex-direction: column;
-  padding: 12px 16px;
+  padding: 12px 6mm;
+  overflow-x: clip;
 }
 
 .standard-exam-free-item,
@@ -735,8 +805,9 @@ a,
   z-index: 3;
   box-sizing: border-box;
   border-radius: 6px;
-  padding-inline: 4px;
-  margin-inline: -4px;
+  padding-inline: 2px;
+  margin-inline: 0;
+  max-width: 100%;
   overflow: visible;
 }
 
@@ -744,9 +815,11 @@ a,
   overflow: visible;
 }
 
-.standard-exam-free-item > .flex.items-baseline {
+.standard-exam-free-item > .flex.items-baseline,
+.standard-exam-free-item > div > .flex.items-baseline {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 
 .standard-exam-free-num,

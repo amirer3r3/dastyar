@@ -21,6 +21,8 @@ import {
   FREE_SHEET_QUESTION_IDLE_CLASS,
   FREE_SHEET_QUESTION_SELECTED_CLASS,
 } from "./free-question-selection";
+import { QUESTION_TEXT_BOX_CONSTRAINT_CLASS } from "../question-text-constraints";
+import StudioSheetQuestionInset from "./StudioSheetQuestionInset";
 
 type Props = {
   pageIndex: number;
@@ -78,7 +80,10 @@ export default function AsmanExamStudioPage({
   const answerRulingStyle = useExamDesignerStore((s) => s.answerRulingStyle);
 
   return (
-    <div className="worksheet-asman-free-studio w-full min-h-0 flex-1 overflow-visible">
+    <div
+      className={`worksheet-asman-free-studio ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} min-h-0 flex-1 overflow-x-clip overflow-y-visible`}
+    >
+      <StudioSheetQuestionInset>
       <StandardExamFreeQuestions
         rows={pageRows}
         startIndex={startIndex}
@@ -143,6 +148,7 @@ export default function AsmanExamStudioPage({
               }
         }
       />
+      </StudioSheetQuestionInset>
     </div>
   );
 }

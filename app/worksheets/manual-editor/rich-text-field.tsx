@@ -11,6 +11,7 @@ import { FontFamily } from "@tiptap/extension-font-family";
 import { Extension } from "@tiptap/core";
 import { useEffect, useMemo } from "react";
 import type { CSSProperties } from "react";
+import { QUESTION_TEXT_BOX_CONSTRAINT_CLASS } from "../question-text-constraints";
 
 const FontSize = Extension.create({
   name: "fontSize",
@@ -103,7 +104,7 @@ export default function RichTextField({
     editorProps: {
       attributes: {
         class:
-          "tiptap max-w-none min-h-[2.5rem] w-full outline-none [&_p]:m-0 [&_p]:block [&_p]:w-full",
+          `tiptap min-h-[2.5rem] outline-none [&_p]:m-0 [&_p]:block [&_p]:max-w-full [&_p]:break-words ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS}`,
         dir: "rtl",
         style: editorSurfaceStyle,
       },
@@ -151,11 +152,11 @@ export default function RichTextField({
 
   return (
     <div
-      className={`${className} ${
+      className={`${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} ${className} ${
         fillWidth
-          ? "block w-full min-w-0 [&_.tiptap]:w-full [&_.ProseMirror]:w-full"
+          ? "block [&_.tiptap]:max-w-full [&_.ProseMirror]:max-w-full"
           : ""
-      }`}
+      } ${editable ? "manual-studio-rich-input" : ""}`}
       style={
         typography
           ? {

@@ -16,6 +16,10 @@ import {
   type AnswerRulingStyle,
 } from "./answer-ruling-style";
 import {
+  QUESTION_FLEX_ROW_CONSTRAINT_CLASS,
+  QUESTION_TEXT_BOX_CONSTRAINT_CLASS,
+} from "./question-text-constraints";
+import {
   answerSpaceHeightPx,
   normalizeAnswerUnits,
 } from "./worksheet-question-layout";
@@ -230,7 +234,7 @@ export function StandardExamQuestionCell({
 }) {
   const units = normalizeAnswerUnits(q.answerLines);
   return (
-    <div className="standard-exam-q-cell">
+    <div className={`standard-exam-q-cell ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS}`}>
       {body ?? (
         <p className="standard-exam-q-text" style={qStyle}>
           {q.text?.trim() || "..."}
@@ -342,7 +346,10 @@ export function StandardExamFreeQuestions({
   const displayRows = rows.length > 0 ? rows : [emptyQuestion()];
 
   return (
-    <div className="standard-exam-free-list w-full px-4 py-3" dir="rtl">
+    <div
+      className={`standard-exam-free-list ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} py-3`}
+      dir="rtl"
+    >
       {displayRows.map((q, i) => {
         const showNumber = rows.length > 0;
         const num = showNumber ? formatPersianDigits(startIndex + i + 1) : "";
@@ -364,15 +371,15 @@ export function StandardExamFreeQuestions({
           <article
             key={q.id}
             data-qid={q.id}
-            className={`question-item standard-exam-free-item w-full text-right ${itemBind?.className ?? ""}`}
+            className={`question-item standard-exam-free-item ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS} text-right ${itemBind?.className ?? ""}`}
             dir="rtl"
             onClick={itemBind?.onClick}
             onPointerDown={itemBind?.onPointerDown}
           >
             {showNumber ? (
-              <div className="w-full text-right">
+              <div className={`${QUESTION_FLEX_ROW_CONSTRAINT_CLASS} text-right`}>
                 <div
-                  className="inline-flex max-w-full items-baseline justify-start gap-2 text-right"
+                  className={`flex max-w-full min-w-0 items-baseline justify-start gap-2 text-right ${QUESTION_FLEX_ROW_CONSTRAINT_CLASS}`}
                   style={qStyle}
                 >
                 <span
@@ -381,7 +388,9 @@ export function StandardExamFreeQuestions({
                 >
                   {num}-
                 </span>
-                <div className="question-text min-w-0 flex-1 font-medium text-slate-900">
+                <div
+                  className={`question-text flex-1 font-medium text-slate-900 ${QUESTION_TEXT_BOX_CONSTRAINT_CLASS}`}
+                >
                   {renderQuestionBody && rows.length > 0 ? (
                     renderQuestionBody(q, startIndex + i)
                   ) : (
